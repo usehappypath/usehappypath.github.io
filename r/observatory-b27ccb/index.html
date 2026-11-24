@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>The Observatory: a reader's review</title>
+<meta name="description" content="A read-only review of observatory.mgorsky.net on 24 November 2026, by Happy Path (Podway).">
+<link rel="stylesheet" href="../../style.css">
+<style>
+.card{border:1px solid var(--line);border-radius:14px;padding:4px 18px 10px;margin:18px 0;background:var(--card)}
+.card h3{font-size:19px;margin:16px 0 4px}
+.where{font-size:14px;color:var(--muted);margin:0 0 10px}
+.card p{margin:8px 0}
+.lbl{font-weight:600}
+figure{margin:12px 0}
+figure img{width:100%;height:auto;border:1px solid var(--line);border-radius:8px;display:block}
+figure.narrow img{max-width:300px}
+.pair{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+@media (max-width:640px){.pair{grid-template-columns:1fr}}
+figcaption{font-size:13px;color:var(--muted);margin-top:5px}
+.fixed{border-left:3px solid var(--accent);padding-left:12px}
+.toc a{text-decoration:none}
+.toc li{margin:4px 0}
+.good{background:var(--code);border-radius:12px;padding:6px 18px}
+</style>
+</head>
+<body>
+<header class="top">
+  <span class="brand"><span class="dot"></span>Happy Path · site review</span>
+</header>
+
+<main class="post">
+<section class="hero">
+  <p class="kicker">For the team behind The Observatory</p>
+  <h1>The Observatory: a reader's review</h1>
+  <p class="meta">observatory.mgorsky.net · 24 November 2026</p>
+  <p class="lead">This review was made by Happy Path, the site-testing tool from Podway. We read the site the way a careful reader would and wrote down where a reader gets stuck. We only browsed. We didn't change anything or send any forms.</p>
+  <p class="note">This page has no links to it from anywhere and asks search engines not to list it. Anyone with the link can open it.</p>
+</section>
+
+<section>
+  <h2>What we checked</h2>
+  <p>On 24 November 2026 we loaded 71 pages over 12 minutes, on a computer (1280 px wide) and a phone (390 px), in English and in Russian. We did not test sign-up, email delivery, Telegram, dark mode or keyboard focus.</p>
+  <div class="good">
+    <p><b>What works:</b> we picked 9 stories and opened the article each one is based on. All 9 summaries matched their source on numbers, names and dates. All 9 source links worked and were on topic.</p>
+  </div>
+  <p>Below are 15 things a reader may trip over. Each one showed up in 2 of 2 checks in a fresh browser. They are grouped by what the reader is trying to do. Each card says what "fixed" looks like, so you can check it.</p>
+  <ul class="toc">
+    <li><a href="#story">Checking a story</a> (1–5)</li>
+    <li><a href="#choose">Choosing a newsletter</a> (6–8)</li>
+    <li><a href="#past">Browsing past issues</a> (9–11)</li>
+    <li><a href="#ru">Reading in Russian and on a phone</a> (12–15)</li>
+    <li><a href="#daily">From our earlier checks</a> (3 more)</li>
+  </ul>
+  <p class="note">The round "Made with Podway" badge in some screenshots is ours. It is not part of any finding.</p>
+</section>
+
+<section id="story">
+  <h2>Checking a story</h2>
+
+  <div class="card">
+    <h3>1. Issue pages have no links to the sources</h3>
+    <p class="where">Issue pages, e.g. /archive/472/ · computer and phone</p>
+    <p><span class="lbl">What we saw:</span> source names are plain text, such as "TechCrunch; also Bloomberg Technology". Story titles are not links. We counted the links in 8 issues from October and November: all 8 had none. The issue of 29 September has 80 links for 40 stories, and the Notes essay /archive/471/ has 48. Science corner papers have no link to the paper anywhere on the site.</p>
+    <figure><img src="img/no-links.png" alt="Issue 472: story titles and grey source names, none of them links"><figcaption>/archive/472/. "Reuters (Technology)" and "TechCrunch" are text, not links.</figcaption></figure>
+    <p><span class="lbl">Why it matters:</span> the Terms say "Every note links to its source, and you should read the source before you rely on a claim." On these pages a reader can't.</p>
+    <p class="fixed"><span class="lbl">Fixed when:</span> each story on an issue page links to its original, as /archive/6/ does. Each Science corner paper links to the paper.</p>
+  </div>
+
+  <div class="card">
+    <h3>2. A source line and an "author has a stake" note are missing</h3>
+    <p class="where">English front page and /ai-in-management/ · computer</p>
+    <p><span class="lbl">What we saw:</span> the story "Joanna Stern says Siri AI still fails basics on the HomeView despite Apple's Google partnership" has no source line. The next story follows at once. The Russian front page shows the line, and so does /archive/451/: "Bloomberg Tech · author has a stake: …".</p>
+    <div class="pair">
+      <figure><img src="img/source-en.png" alt="English front page: the Joanna Stern story with no source line"><figcaption>English: no source line.</figcaption></figure>
+      <figure><img src="img/source-ru.png" alt="Russian front page: the same story with 'Bloomberg Tech · у автора есть доля'"><figcaption>Russian: source and "у автора есть доля" (author has a stake).</figcaption></figure>
+    </div>
+    <p><span class="lbl">Why it matters:</span> the stake note is the one warning a reader most needs, and it is the one that disappears.</p>
+    <p class="fixed"><span class="lbl">Fixed when:</span> the English front page shows "Bloomberg Tech · author has a stake: …" under this story, as the Russian page does.</p>
+  </div>
+
+  <div class="card">
+    <h3>3. A placeholder instead of a number on the About page</h3>
+    <p class="where">/about/ and /ru/about/ · computer and phone</p>
+    <p><span class="lbl">What we saw:</span> in step "05 · Checking / The credibility check", the big number is the literal text "{labeled}", followed by "of 1,170 notes this week passed with a label stating their origin". Every other step shows a number.</p>
+    <figure><img src="img/placeholder.png" alt="About page: The credibility check card shows {labeled}"><figcaption>/about/. The other cards show 1, 11 and 8,282.</figcaption></figure>
+    <p><span class="lbl">Why it matters:</span> it sits on the page that explains how the site checks its facts.</p>
+    <p class="fixed"><span class="lbl">Fixed when:</span> the card shows a number, or the card hides its number when the value is missing. Same on /ru/about/.</p>
+  </div>
+
+  <div class="card">
+    <h3>4. Story counts are higher than the stories shown</h3>
+    <p class="where">/archive/ and the group pages · computer</p>
+    <p><span class="lbl">What we saw:</span> in 5 of 8 issues we opened, the archive count was higher than the stories on the issue page. "37 stories" (AI daily, 22 Nov) opens 20. "28 stories" (24 Nov) opens 20. "23 stories" opens 20. "18 stories" (India &amp; AI, 24 Nov) opens 12. "14 stories" (Ethiopia daily brief, 24 Nov) opens 12. Three other issues matched. Our guess is that issue pages stop at 20 or 12, but we did not confirm that.</p>
+    <figure><img src="img/counts.png" alt="Archive list: AI daily, 22-Nov-26 shows 37 stories"><figcaption>/archive/: "AI daily, 22-Nov-26 … 37 stories". The issue page shows 20.</figcaption></figure>
+    <p><span class="lbl">Why it matters:</span> a reader who counts will find 17 stories missing.</p>
+    <p class="fixed"><span class="lbl">Fixed when:</span> each count equals the stories on its issue page, or the issue page lists the rest.</p>
+  </div>
+
+  <div class="card">
+    <h3>5. The Anthropic IPO figures don't agree</h3>
+    <p class="where">Front page, AI in Management · computer · we are less sure about this one</p>
+    <p><span class="lbl">What we saw:</span> at the same $83 share price, the lead says "the offering of 980 million shares" (that is about $81 billion). The next story says "Anthropic raises $107.3 billion in IPO at $83 per share". A third says "almost $120 billion". An earlier issue's headline calls a $1.4 trillion valuation a "$1.4 trillion IPO".</p>
+    <div class="pair">
+      <figure><img src="img/ipo-a.png" alt="Lead story: offering of 980 million shares at $83"><figcaption>980 million shares at $83.</figcaption></figure>
+      <figure><img src="img/ipo-b.png" alt="Story: Anthropic raises $107.3 billion in IPO at $83 per share"><figcaption>"$107.3 billion … at $83 per share".</figcaption></figure>
+    </div>
+    <p><span class="lbl">Why it matters:</span> the numbers may count different things, such as a private placement. The page doesn't say so, so they read as a contradiction.</p>
+    <p class="fixed"><span class="lbl">Fixed when:</span> each figure says what it includes ("including the private placement"), and valuation is not called IPO size.</p>
+  </div>
+</section>
+
+<section id="choose">
+  <h2>Choosing a newsletter</h2>
+
+  <div class="card">
+    <h3>6. "Notes on Agentic Work" has two schedules</h3>
+    <p class="where">Group page, /subscribe/, front page, /ru/ · computer</p>
+    <p><span class="lbl">What we saw:</span> "Notes on Agentic Work · Mon, Wed, 18:00", and on the next line "a dense letter every Tuesday and Thursday". The front page says "Mon, Wed", /ru/ says "пн, ср". The latest issue is dated Tuesday, 24 November 2026.</p>
+    <figure><img src="img/schedule.png" alt="Schedule 'Mon, Wed, 18:00' above a description saying 'every Tuesday and Thursday'"><figcaption>The schedule and the description, one line apart.</figcaption></figure>
+    <p><span class="lbl">Why it matters:</span> a subscriber picks a delivery hour and needs to know the days.</p>
+    <p class="fixed"><span class="lbl">Fixed when:</span> one schedule appears everywhere and matches the days issues go out.</p>
+  </div>
+
+  <div class="card">
+    <h3>7. "Dispatches from Others" is offered, but its last issue was 2 November</h3>
+    <p class="where">/subscribe/ and /archive/ · computer and phone</p>
+    <p><span class="lbl">What we saw:</span> /subscribe/ offers "Interesting Politics · Dispatches from Others … Sun–Fri". In the archive, its newest issue is "Dispatches from Others, 2-Nov-26", 22 days before this review. Every other daily has an issue on 24 November. /about/ counts "four desks" including Interesting Politics, but it has no page or menu entry.</p>
+    <div class="pair">
+      <figure><img src="img/dispatches.png" alt="Subscribe page offering Dispatches from Others, Sun–Fri"><figcaption>/subscribe/: offered Sunday to Friday.</figcaption></figure>
+      <figure class="narrow"><img src="img/dispatches-archive.png" alt="Archive filtered to Dispatches from Others, newest issue 2-Nov-26"><figcaption>/archive/ on a phone, filtered: newest issue 2 Nov.</figcaption></figure>
+    </div>
+    <p><span class="lbl">Why it matters:</span> we did not subscribe, so we can't say whether it still sends. A reader sees an offer with no recent issue to look at.</p>
+    <p class="fixed"><span class="lbl">Fixed when:</span> it shows new issues again, or it is marked paused, or it leaves /subscribe/.</p>
+  </div>
+
+  <div class="card">
+    <h3>8. Some days are off the stated schedule</h3>
+    <p class="where">/archive/ · computer</p>
+    <p><span class="lbl">What we saw:</span> Science corner and Ethiopian banking and fintech are listed for Friday. Both have issues on Wednesday 28 October and Friday 30 October, and Science corner has none on Friday 6 November. AI daily and the Ethiopia daily brief ("Sun–Fri") go from 5 November to 8 November with no issue on Friday 6 November. The archive does not mention the gap.</p>
+    <figure><img src="img/schedule-gap.png" alt="Archive list including Science corner, 28-Oct-26"><figcaption>/archive/: a "Friday" publication on Wednesday 28 October.</figcaption></figure>
+    <p><span class="lbl">Why it matters:</span> readers who rely on the schedule notice a missing day.</p>
+    <p class="fixed"><span class="lbl">Fixed when:</span> issues follow the stated days, or the archive notes a missed day.</p>
+  </div>
+</section>
+
+<section id="past">
+  <h2>Browsing past issues</h2>
+
+  <div class="card">
+    <h3>9. An issue page doesn't say which issue it is</h3>
+    <p class="where">Issue pages, e.g. /archive/264/ · computer and phone</p>
+    <p><span class="lbl">What we saw:</span> on 11 of 12 issue pages, the page starts with "← The archive" and the group name. The issue's name and date ("Ethiopia daily brief, 29-Oct-26") are only in the browser tab. The only date on the page is the header, "Tuesday, 24 November 2026". There is no link to the previous or next issue.</p>
+    <figure><img src="img/issue-top.png" alt="An October issue page whose only visible date is Tuesday, 24 November 2026"><figcaption>/archive/264/, an October issue. The only date shown is today's.</figcaption></figure>
+    <p><span class="lbl">Why it matters:</span> an old issue reads as today's news.</p>
+    <p class="fixed"><span class="lbl">Fixed when:</span> each issue starts with its name and date, with previous and next links. That heading would also give these pages the main heading they lack (see the last section).</p>
+  </div>
+
+  <div class="card">
+    <h3>10. Old leads come back, and Science corner entries look the same</h3>
+    <p class="where">/ethiopia/, /ai-science-corner/, /archive/ · computer</p>
+    <p><span class="lbl">What we saw:</span> "Awash Bank applies for Djibouti banking licence" leads the Ethiopia daily brief on 2 November and Ethiopian banking and fintech on 13 November. "National Bank of Ethiopia issues Directive No. FS/01/2026" leads the brief on 18 November and banking on 20 November. Two more leads repeat between AI daily and Podcasts on the same day. All 8 Science corner issues show the same line: "Research papers of the week on AI and the fields around it…".</p>
+    <div class="pair">
+      <figure><img src="img/old-lead.png" alt="Ethiopia page listing the Awash Bank story as a lead"><figcaption>/ethiopia/: the Awash Bank lead.</figcaption></figure>
+      <figure class="narrow"><img src="img/science-archive.png" alt="Science corner issues in the archive, all with the same summary"><figcaption>/archive/ filtered to Science corner on a phone.</figcaption></figure>
+    </div>
+    <p><span class="lbl">Why it matters:</span> a repeat reads as new news, and identical entries can't be told apart.</p>
+    <p class="fixed"><span class="lbl">Fixed when:</span> a repeat lead is marked ("first reported 2 Nov") or skipped, and each Science corner entry shows its top paper.</p>
+  </div>
+
+  <div class="card">
+    <h3>11. The Ethiopia AI weekly is short and repeats itself</h3>
+    <p class="where">/archive/169/ and the Ethiopia AI weekly issues · computer</p>
+    <p><span class="lbl">What we saw:</span> 3 of its last 4 issues have 1 to 3 stories ("1 stories" on 11 Nov). In /archive/169/, one event appears twice: "Ethiopia Seeks Partner Support for AI Institutions at Bangkok Roundtable" (Tigist Fisseha) and "Ethiopia Joins AI Roundtable at IMF and World Bank Meetings" (Tiguist Fisseha), the same person spelled two ways. A recent lead is about a blockchain AI hub (OpenGradient), not Ethiopia.</p>
+    <figure><img src="img/ethiopia-dup.png" alt="Issue 169 with two stories about the same roundtable"><figcaption>/archive/169/: the same roundtable told twice.</figcaption></figure>
+    <p><span class="lbl">Why it matters:</span> how many stories a weekly should have is your call. The duplicates and the off-topic lead are the parts a reader will notice.</p>
+    <p class="fixed"><span class="lbl">Fixed when:</span> one event appears once per issue, leads match the desk's topic, and counts read "1 story".</p>
+  </div>
+</section>
+
+<section id="ru">
+  <h2>Reading in Russian and on a phone</h2>
+
+  <div class="card">
+    <h3>12. The Russian lists differ from the English ones</h3>
+    <p class="where">/ru/agentic-software-engineering/ vs /agentic-software-engineering/ · computer</p>
+    <p><span class="lbl">What we saw:</span> both pages list the same issues, but 10 of 11 show a different lead story. Issue 471 leads with "OpenAI says Codex found the root cause…" in English and "CodeRabbit launches public beta of Verify…" in Russian. 5 Russian leads are in English. Issue 344 is dated 10 November in English and 9 November in Russian.</p>
+    <div class="pair">
+      <figure><img src="img/en-agentic.png" alt="English group page, issue 471 led by the OpenAI Codex story"><figcaption>English.</figcaption></figure>
+      <figure><img src="img/ru-agentic.png" alt="Russian group page, issue 471 led by the CodeRabbit story in English"><figcaption>Russian: a different lead, in English.</figcaption></figure>
+    </div>
+    <p><span class="lbl">Why it matters:</span> a reader who switches language sees a different newspaper.</p>
+    <p class="fixed"><span class="lbl">Fixed when:</span> each issue has the same lead and date in both languages, translated.</p>
+  </div>
+
+  <div class="card">
+    <h3>13. English words left on Russian pages</h3>
+    <p class="where">/ru/archive/, /ru/, /ru/india/ · computer</p>
+    <p><span class="lbl">What we saw:</span> /ru/archive/ says "N stories" in English 132 times. /ru/india/ has the heading "The publications". /ru/ has "Industry / Отчет Tracxn" where other categories are Russian ("Компании /"), and a Spanish word: "Модели visión-язык".</p>
+    <div class="pair">
+      <figure><img src="img/ru-stories.png" alt="Russian archive with counts in English"><figcaption>/ru/archive/: "stories" in English.</figcaption></figure>
+      <figure><img src="img/ru-industry.png" alt="Russian front page with an English category label Industry"><figcaption>/ru/: "Industry /".</figcaption></figure>
+    </div>
+    <p class="fixed"><span class="lbl">Fixed when:</span> these strings are Russian, with Russian plural forms for the counts.</p>
+  </div>
+
+  <div class="card">
+    <h3>14. The Russian logo is cut off on a phone</h3>
+    <p class="where">/ru/ · phone, 390 px</p>
+    <p><span class="lbl">What we saw:</span> the logo is 403 px wide on a 390 px screen. The "t" and the "y" are cut. The English logo fits.</p>
+    <figure class="narrow"><img src="img/ru-phone.png" alt="Russian front page on a phone with the logo cut at both edges"><figcaption>/ru/ on a phone.</figcaption></figure>
+    <p class="fixed"><span class="lbl">Fixed when:</span> the logo fits inside the screen on /ru/, as on /.</p>
+  </div>
+
+  <div class="card">
+    <h3>15. Small filter buttons and broken dates on the phone archive</h3>
+    <p class="where">/archive/ · phone, 390 px</p>
+    <p><span class="lbl">What we saw:</span> the 10 filter buttons are 34 px tall. The filters work and the selected one is clear. Dates break in the middle: "Dispatches from Others, 2-" on one line and "Nov-26" on the next.</p>
+    <figure class="narrow"><img src="img/taps.png" alt="Phone archive with filter buttons and a date split across two lines"><figcaption>/archive/ on a phone. The buttons are 34 px tall. Apple suggests at least 44, Google 48.</figcaption></figure>
+    <p class="fixed"><span class="lbl">Fixed when:</span> the buttons are about 44 px tall and each date stays on one line.</p>
+  </div>
+</section>
+
+<section id="daily">
+  <h2>From our earlier checks</h2>
+  <p>Happy Path has looked at the public pages once a day since 23 November. These three came from those checks.</p>
+
+  <div class="card">
+    <h3>The visitor counter stops with an error</h3>
+    <p class="where">14 pages, including /, /about/ and the topic pages · computer and phone</p>
+    <p><span class="lbl">What we saw:</span> the page's script stops with <code>goatcounter.count is not a function</code>. Nothing on the screen shows it, so there is no screenshot. The Privacy page says the site counts visits with GoatCounter.</p>
+    <p class="fixed"><span class="lbl">Fixed when:</span> the error is gone from the browser console and visits appear in GoatCounter.</p>
+  </div>
+
+  <div class="card">
+    <h3>The Privacy page slides sideways on a phone</h3>
+    <p class="where">/privacy/ · phone, 390 px</p>
+    <p><span class="lbl">What we saw:</span> a long web address is wider than the screen, so the page moves left and right.</p>
+    <figure class="narrow"><img src="img/privacy.png" alt="Privacy page on a phone"><figcaption>/privacy/ on a phone.</figcaption></figure>
+    <p class="fixed"><span class="lbl">Fixed when:</span> long addresses wrap and the page no longer scrolls sideways.</p>
+  </div>
+
+  <div class="card">
+    <h3>Four pages have no main heading</h3>
+    <p class="where">/, /ru/, /archive/472/, /ru/archive/472/</p>
+    <p><span class="lbl">What we saw:</span> these pages have no top-level heading. On the front page the logo picture is the only title. Screen readers and search engines use that heading to tell what a page is. It is not visible, so there is no screenshot.</p>
+    <p class="fixed"><span class="lbl">Fixed when:</span> each page has one main heading (card 9's issue heading would cover the issue pages).</p>
+  </div>
+</section>
+
+<section>
+  <h2>After changes</h2>
+  <p>Tell us when you have made changes, and we will run the same checks again and mark what is fixed.</p>
+  <p class="muted">If you would like these as GitHub issues that are rechecked on their own after each fix, Happy Path can do that: <a href="https://usehappypath.github.io/">usehappypath.github.io</a>.</p>
+</section>
+</main>
+
+<footer>
+  <p>Happy Path is run by Podway.</p>
+</footer>
+</body>
+</html>
