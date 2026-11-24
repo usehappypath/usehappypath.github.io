@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>The Observatory: a reader's review</title>
-<meta name="description" content="A read-only review of observatory.mgorsky.net on 24 November 2026, by Happy Path (Podway).">
+<meta name="description" content="A read-only review of observatory.mgorsky.net on 24 November 2026, by Happy Path.">
 <link rel="stylesheet" href="../../style.css">
 <style>
 .card{border:1px solid var(--line);border-radius:14px;padding:4px 18px 10px;margin:18px 0;background:var(--card)}
@@ -23,7 +23,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 .toc a{text-decoration:none}
 .toc li{margin:4px 0}
 .good{background:var(--code);border-radius:12px;padding:6px 18px}
-.sum{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px 18px 16px;margin-top:8px}
+.sumx{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px 18px 16px;margin-top:8px}
 .sum h2{font-size:22px;margin:14px 0 4px}
 .sum .sub{color:var(--muted);font-size:15px;margin:0 0 14px}
 .journey{position:relative;padding-left:28px}
@@ -31,14 +31,14 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 .step{position:relative;margin:0 0 14px}
 .pin{position:absolute;left:-28px;top:1px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 11px system-ui;color:#fff;background:var(--md)}
 .pin.ok{background:var(--ok)}.pin.hi{background:var(--hi)}
-.st{font-weight:700;font-size:16px}.sd{font-size:14px;color:var(--muted)}
+.st{font-weight:700;font-size:16px;color:inherit;text-decoration:none;display:inline-block}.st:after{content:" ↓";color:var(--muted);font-weight:400}.sd{font-size:14px;color:var(--muted)}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .chip{font-size:13.5px;border-radius:999px;padding:0 12px;min-height:44px;display:inline-flex;align-items:center;border:1.5px solid var(--line);background:var(--bg);text-decoration:none;color:inherit}
 .chip.hi{border-color:var(--hi);color:var(--hi);font-weight:600}.chip.md{border-color:var(--md)}
 .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin:6px 0 0}
 .legend i{display:inline-block;width:12px;height:12px;border-radius:999px;border:1.5px solid var(--line);vertical-align:-2px;margin-right:5px}
 .legend .lhi{border-color:var(--hi)}.legend .lmd{border-color:var(--md)}
-.first{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:15px}
+.first{margin:16px 0 0;font-size:15px}
 .first a{font-weight:600}
 :root{--hi:#dc2626;--md:#d97706;--ok:#15803d}
 @media (prefers-color-scheme:dark){:root{--hi:#f87171;--md:#fbbf24;--ok:#4ade80}}
@@ -46,7 +46,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 :root[data-theme="light"]{--bg:#fbfaf7;--fg:#1d1d1b;--muted:#6b6a65;--line:#e6e3dc;--card:#fff;--accent:#1f8a5b;--accent-fg:#fff;--code:#f1efe9;--hi:#dc2626;--md:#d97706;--ok:#15803d}
 :root[data-theme="dark"]{--bg:#141413;--fg:#ecebe6;--muted:#a3a19a;--line:#2d2c29;--card:#1c1c1a;--accent:#3cc48a;--accent-fg:#0d1f16;--code:#25241f;--hi:#f87171;--md:#fbbf24;--ok:#4ade80}
 .top{justify-content:space-between}
-.theme{min-height:44px;min-width:44px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:999px;padding:0 14px;font:500 14px system-ui;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.theme{min-height:44px;min-width:44px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:999px;padding:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
 .how{font-size:14px;color:var(--muted);margin:14px 2px 0}
 .tap{font-size:13px;color:var(--muted);margin:0 0 14px}
 </style>
@@ -55,33 +55,30 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 <body>
 <header class="top">
   <span class="brand"><span class="dot"></span>Happy Path · site review</span>
-  <button class="theme" type="button" id="theme" aria-label="Switch light or dark theme"><span id="theme-l">Dark</span></button>
+  <button class="theme" type="button" id="theme" aria-label="Switch to dark theme"><svg id="i-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg id="i-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
 </header>
 
 <main class="post">
 <section class="hero">
   <h1>The Observatory: a reader's review</h1>
-  <p class="meta">observatory.mgorsky.net · 24 November 2026 · by Happy Path (Podway)</p>
+  <p class="meta">observatory.mgorsky.net · 24 November 2026 · by Happy Path</p>
   <p class="lead">We read your site as a careful reader would. We only browsed and changed nothing.</p>
 </section>
 
 
-<section>
-  <div class="sum">
+<section id="stuck">
   <h2>Where a reader gets stuck</h2>
   <p class="tap">Tap a label for details.</p>
   <div class="journey">
-    <div class="step"><span class="pin ok">✓</span><div class="st">Read a story</div><div class="sd">We checked 9 stories against their sources. All 9 match, and all 9 links work.</div></div>
-    <div class="step"><span class="pin hi">5</span><div class="st">Check where it came from</div><div class="chips"><a class="chip hi" href="#c1">No source links</a><a class="chip md" href="#c3">“{labeled}” on About</a><a class="chip md" href="#c4">Counts too high</a><a class="chip md" href="#c5">IPO figures clash</a><a class="chip " href="#c2">Stake note missing</a></div></div>
-    <div class="step"><span class="pin">3</span><div class="st">Pick a newsletter</div><div class="chips"><a class="chip md" href="#c6">Two schedules</a><a class="chip md" href="#c7">No issue since 2 Nov</a><a class="chip " href="#c8">Missed days</a></div></div>
-    <div class="step"><span class="pin">3</span><div class="st">Look at past issues</div><div class="chips"><a class="chip md" href="#c11">Ethiopia weekly repeats</a><a class="chip " href="#c9">No date on issue</a><a class="chip " href="#c10">Old leads return</a></div></div>
-    <div class="step"><span class="pin">4</span><div class="st">Switch to Russian, use a phone</div><div class="chips"><a class="chip md" href="#c12">Different leads</a><a class="chip " href="#c13">English left in</a><a class="chip " href="#c14">Logo cut off</a><a class="chip " href="#c15">Small buttons</a></div></div>
-    <div class="step"><span class="pin">3</span><div class="st">Behind the scenes</div><div class="chips"><a class="chip md" href="#d1">Visitor counter error</a><a class="chip md" href="#d2">Privacy page slides</a><a class="chip " href="#d3">Missing headings</a></div></div>
+    <div class="step"><span class="pin hi">5</span><a class="st" href="#story">Checking a story</a><div class="sd">The summaries are right: 9 of 9 match their sources.</div><div class="chips"><a class="chip hi" href="#c1">No source links</a><a class="chip md" href="#c3">“{labeled}” on About</a><a class="chip md" href="#c4">Counts too high</a><a class="chip md" href="#c5">IPO figures clash</a><a class="chip " href="#c2">Stake note missing</a></div></div>
+    <div class="step"><span class="pin ">3</span><a class="st" href="#choose">Choosing a newsletter</a><div class="chips"><a class="chip md" href="#c6">Two schedules</a><a class="chip md" href="#c7">No issue since 2 Nov</a><a class="chip " href="#c8">Missed days</a></div></div>
+    <div class="step"><span class="pin ">3</span><a class="st" href="#past">Browsing past issues</a><div class="chips"><a class="chip md" href="#c11">Ethiopia weekly repeats</a><a class="chip " href="#c9">No date on issue</a><a class="chip " href="#c10">Old leads return</a></div></div>
+    <div class="step"><span class="pin ">4</span><a class="st" href="#ru">Reading in Russian and on a phone</a><div class="chips"><a class="chip md" href="#c12">Different leads</a><a class="chip " href="#c13">English left in</a><a class="chip " href="#c14">Logo cut off</a><a class="chip " href="#c15">Small buttons</a></div></div>
+    <div class="step"><span class="pin ">3</span><a class="st" href="#daily">From our earlier checks</a><div class="chips"><a class="chip md" href="#d1">Visitor counter error</a><a class="chip md" href="#d2">Privacy page slides</a><a class="chip " href="#d3">Missing headings</a></div></div>
   </div>
   <div class="legend"><span><i class="lhi"></i>hurts trust</span><span><i class="lmd"></i>confuses readers</span><span><i></i>small</span></div>
   <p class="first"><b>Fix these 3 first:</b> <a href="#c1">source links on issue pages</a>, <a href="#c3">the “{labeled}” placeholder</a>, <a href="#c4">the story counts</a>.</p>
-  </div>
-<p class="how">How we tested: 71 pages, computer and phone, English and Russian. Each problem showed up twice in a fresh browser. Not tested: sign-up, email, Telegram, keyboard use. The round "Made with Podway" badge in screenshots is ours.</p>
+  <p class="how">How we tested: 71 pages, computer and phone, English and Russian. Each problem showed up twice in a fresh browser. Not tested: sign-up, email, Telegram, keyboard use. The round badge in the corner of some screenshots is not part of any finding.</p>
 </section>
 
 <section id="story">
@@ -89,17 +86,17 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 
   <div class="card" id="c1">
     <h3>1. Issue pages have no links to the sources</h3>
-    <p class="where">Issue pages, e.g. /archive/472/ · computer and phone</p>
-    <p><span class="lbl">What we saw:</span> source names are plain text, such as "TechCrunch; also Bloomberg Technology". Story titles are not links. We counted the links in 8 issues from October and November: all 8 had none. The issue of 29 September has 80 links for 40 stories, and the Notes essay /archive/471/ has 48. Science corner papers have no link to the paper anywhere on the site.</p>
-    <figure><img src="img/no-links.png" alt="Issue 472: story titles and grey source names, none of them links"><figcaption>/archive/472/. "Reuters (Technology)" and "TechCrunch" are text, not links.</figcaption></figure>
+    <p class="where">Issue pages, e.g. <a href="https://observatory.mgorsky.net/archive/472/" target="_blank" rel="noopener">/archive/472/</a> · computer and phone</p>
+    <p><span class="lbl">What we saw:</span> source names are plain text, such as "TechCrunch; also Bloomberg Technology". Story titles are not links. We counted the links in 8 issues from October and November: all 8 had none. The issue of 29 September has 80 links for 40 stories, and the Notes essay <a href="https://observatory.mgorsky.net/archive/471/" target="_blank" rel="noopener">/archive/471/</a> has 48. Science corner papers have no link to the paper anywhere on the site.</p>
+    <figure><img src="img/no-links.png" alt="Issue 472: story titles and grey source names, none of them links"><figcaption><a href="https://observatory.mgorsky.net/archive/472/" target="_blank" rel="noopener">/archive/472/</a>. "Reuters (Technology)" and "TechCrunch" are text, not links.</figcaption></figure>
     <p><span class="lbl">Why it matters:</span> the Terms say "Every note links to its source, and you should read the source before you rely on a claim." On these pages a reader can't.</p>
-    <p class="fixed"><span class="lbl">Fixed when:</span> each story on an issue page links to its original, as /archive/6/ does. Each Science corner paper links to the paper.</p>
+    <p class="fixed"><span class="lbl">Fixed when:</span> each story on an issue page links to its original, as <a href="https://observatory.mgorsky.net/archive/6/" target="_blank" rel="noopener">/archive/6/</a> does. Each Science corner paper links to the paper.</p>
   </div>
 
   <div class="card" id="c2">
     <h3>2. A source line and an "author has a stake" note are missing</h3>
-    <p class="where">English front page and /ai-in-management/ · computer</p>
-    <p><span class="lbl">What we saw:</span> the story "Joanna Stern says Siri AI still fails basics on the HomeView despite Apple's Google partnership" has no source line. The next story follows at once. The Russian front page shows the line, and so does /archive/451/: "Bloomberg Tech · author has a stake: …".</p>
+    <p class="where">English front page and <a href="https://observatory.mgorsky.net/ai-in-management/" target="_blank" rel="noopener">/ai-in-management/</a> · computer</p>
+    <p><span class="lbl">What we saw:</span> the story "Joanna Stern says Siri AI still fails basics on the HomeView despite Apple's Google partnership" has no source line. The next story follows at once. The Russian front page shows the line, and so does <a href="https://observatory.mgorsky.net/archive/451/" target="_blank" rel="noopener">/archive/451/</a>: "Bloomberg Tech · author has a stake: …".</p>
     <div class="pair">
       <figure><img src="img/source-en.png" alt="English front page: the Joanna Stern story with no source line"><figcaption>English: no source line.</figcaption></figure>
       <figure><img src="img/source-ru.png" alt="Russian front page: the same story with 'Bloomberg Tech · у автора есть доля'"><figcaption>Russian: source and "у автора есть доля" (author has a stake).</figcaption></figure>
@@ -110,18 +107,18 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 
   <div class="card" id="c3">
     <h3>3. A placeholder instead of a number on the About page</h3>
-    <p class="where">/about/ and /ru/about/ · computer and phone</p>
+    <p class="where"><a href="https://observatory.mgorsky.net/about/" target="_blank" rel="noopener">/about/</a> and <a href="https://observatory.mgorsky.net/ru/about/" target="_blank" rel="noopener">/ru/about/</a> · computer and phone</p>
     <p><span class="lbl">What we saw:</span> in step "05 · Checking / The credibility check", the big number is the literal text "{labeled}", followed by "of 1,170 notes this week passed with a label stating their origin". Every other step shows a number.</p>
-    <figure><img src="img/placeholder.png" alt="About page: The credibility check card shows {labeled}"><figcaption>/about/. The other cards show 1, 11 and 8,282.</figcaption></figure>
+    <figure><img src="img/placeholder.png" alt="About page: The credibility check card shows {labeled}"><figcaption><a href="https://observatory.mgorsky.net/about/" target="_blank" rel="noopener">/about/</a>. The other cards show 1, 11 and 8,282.</figcaption></figure>
     <p><span class="lbl">Why it matters:</span> it sits on the page that explains how the site checks its facts.</p>
-    <p class="fixed"><span class="lbl">Fixed when:</span> the card shows a number, or the card hides its number when the value is missing. Same on /ru/about/.</p>
+    <p class="fixed"><span class="lbl">Fixed when:</span> the card shows a number, or the card hides its number when the value is missing. Same on <a href="https://observatory.mgorsky.net/ru/about/" target="_blank" rel="noopener">/ru/about/</a>.</p>
   </div>
 
   <div class="card" id="c4">
     <h3>4. Story counts are higher than the stories shown</h3>
-    <p class="where">/archive/ and the group pages · computer</p>
+    <p class="where"><a href="https://observatory.mgorsky.net/archive/" target="_blank" rel="noopener">/archive/</a> and the group pages · computer</p>
     <p><span class="lbl">What we saw:</span> in 5 of 8 issues we opened, the archive count was higher than the stories on the issue page. "37 stories" (AI daily, 22 Nov) opens 20. "28 stories" (24 Nov) opens 20. "23 stories" opens 20. "18 stories" (India &amp; AI, 24 Nov) opens 12. "14 stories" (Ethiopia daily brief, 24 Nov) opens 12. Three other issues matched. Our guess is that issue pages stop at 20 or 12, but we did not confirm that.</p>
-    <figure><img src="img/counts.png" alt="Archive list: AI daily, 22-Nov-26 shows 37 stories"><figcaption>/archive/: "AI daily, 22-Nov-26 … 37 stories". The issue page shows 20.</figcaption></figure>
+    <figure><img src="img/counts.png" alt="Archive list: AI daily, 22-Nov-26 shows 37 stories"><figcaption><a href="https://observatory.mgorsky.net/archive/" target="_blank" rel="noopener">/archive/</a>: "AI daily, 22-Nov-26 … 37 stories". The issue page shows 20.</figcaption></figure>
     <p><span class="lbl">Why it matters:</span> a reader who counts will find 17 stories missing.</p>
     <p class="fixed"><span class="lbl">Fixed when:</span> each count equals the stories on its issue page, or the issue page lists the rest.</p>
   </div>
@@ -144,8 +141,8 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 
   <div class="card" id="c6">
     <h3>6. "Notes on Agentic Work" has two schedules</h3>
-    <p class="where">Group page, /subscribe/, front page, /ru/ · computer</p>
-    <p><span class="lbl">What we saw:</span> "Notes on Agentic Work · Mon, Wed, 18:00", and on the next line "a dense letter every Tuesday and Thursday". The front page says "Mon, Wed", /ru/ says "пн, ср". The latest issue is dated Tuesday, 24 November 2026.</p>
+    <p class="where">Group page, <a href="https://observatory.mgorsky.net/subscribe/" target="_blank" rel="noopener">/subscribe/</a>, front page, <a href="https://observatory.mgorsky.net/ru/" target="_blank" rel="noopener">/ru/</a> · computer</p>
+    <p><span class="lbl">What we saw:</span> "Notes on Agentic Work · Mon, Wed, 18:00", and on the next line "a dense letter every Tuesday and Thursday". The front page says "Mon, Wed", <a href="https://observatory.mgorsky.net/ru/" target="_blank" rel="noopener">/ru/</a> says "пн, ср". The latest issue is dated Tuesday, 24 November 2026.</p>
     <figure><img src="img/schedule.png" alt="Schedule 'Mon, Wed, 18:00' above a description saying 'every Tuesday and Thursday'"><figcaption>The schedule and the description, one line apart.</figcaption></figure>
     <p><span class="lbl">Why it matters:</span> a subscriber picks a delivery hour and needs to know the days.</p>
     <p class="fixed"><span class="lbl">Fixed when:</span> one schedule appears everywhere and matches the days issues go out.</p>
@@ -153,21 +150,21 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 
   <div class="card" id="c7">
     <h3>7. "Dispatches from Others" is offered, but its last issue was 2 November</h3>
-    <p class="where">/subscribe/ and /archive/ · computer and phone</p>
-    <p><span class="lbl">What we saw:</span> /subscribe/ offers "Interesting Politics · Dispatches from Others … Sun–Fri". In the archive, its newest issue is "Dispatches from Others, 2-Nov-26", 22 days before this review. Every other daily has an issue on 24 November. /about/ counts "four desks" including Interesting Politics, but it has no page or menu entry.</p>
+    <p class="where"><a href="https://observatory.mgorsky.net/subscribe/" target="_blank" rel="noopener">/subscribe/</a> and <a href="https://observatory.mgorsky.net/archive/" target="_blank" rel="noopener">/archive/</a> · computer and phone</p>
+    <p><span class="lbl">What we saw:</span> <a href="https://observatory.mgorsky.net/subscribe/" target="_blank" rel="noopener">/subscribe/</a> offers "Interesting Politics · Dispatches from Others … Sun–Fri". In the archive, its newest issue is "Dispatches from Others, 2-Nov-26", 22 days before this review. Every other daily has an issue on 24 November. <a href="https://observatory.mgorsky.net/about/" target="_blank" rel="noopener">/about/</a> counts "four desks" including Interesting Politics, but it has no page or menu entry.</p>
     <div class="pair">
-      <figure><img src="img/dispatches.png" alt="Subscribe page offering Dispatches from Others, Sun–Fri"><figcaption>/subscribe/: offered Sunday to Friday.</figcaption></figure>
-      <figure class="narrow"><img src="img/dispatches-archive.png" alt="Archive filtered to Dispatches from Others, newest issue 2-Nov-26"><figcaption>/archive/ on a phone, filtered: newest issue 2 Nov.</figcaption></figure>
+      <figure><img src="img/dispatches.png" alt="Subscribe page offering Dispatches from Others, Sun–Fri"><figcaption><a href="https://observatory.mgorsky.net/subscribe/" target="_blank" rel="noopener">/subscribe/</a>: offered Sunday to Friday.</figcaption></figure>
+      <figure class="narrow"><img src="img/dispatches-archive.png" alt="Archive filtered to Dispatches from Others, newest issue 2-Nov-26"><figcaption><a href="https://observatory.mgorsky.net/archive/" target="_blank" rel="noopener">/archive/</a> on a phone, filtered: newest issue 2 Nov.</figcaption></figure>
     </div>
     <p><span class="lbl">Why it matters:</span> we did not subscribe, so we can't say whether it still sends. A reader sees an offer with no recent issue to look at.</p>
-    <p class="fixed"><span class="lbl">Fixed when:</span> it shows new issues again, or it is marked paused, or it leaves /subscribe/.</p>
+    <p class="fixed"><span class="lbl">Fixed when:</span> it shows new issues again, or it is marked paused, or it leaves <a href="https://observatory.mgorsky.net/subscribe/" target="_blank" rel="noopener">/subscribe/</a>.</p>
   </div>
 
   <div class="card" id="c8">
     <h3>8. Some days are off the stated schedule</h3>
-    <p class="where">/archive/ · computer</p>
+    <p class="where"><a href="https://observatory.mgorsky.net/archive/" target="_blank" rel="noopener">/archive/</a> · computer</p>
     <p><span class="lbl">What we saw:</span> Science corner and Ethiopian banking and fintech are listed for Friday. Both have issues on Wednesday 28 October and Friday 30 October, and Science corner has none on Friday 6 November. AI daily and the Ethiopia daily brief ("Sun–Fri") go from 5 November to 8 November with no issue on Friday 6 November. The archive does not mention the gap.</p>
-    <figure><img src="img/schedule-gap.png" alt="Archive list including Science corner, 28-Oct-26"><figcaption>/archive/: a "Friday" publication on Wednesday 28 October.</figcaption></figure>
+    <figure><img src="img/schedule-gap.png" alt="Archive list including Science corner, 28-Oct-26"><figcaption><a href="https://observatory.mgorsky.net/archive/" target="_blank" rel="noopener">/archive/</a>: a "Friday" publication on Wednesday 28 October.</figcaption></figure>
     <p><span class="lbl">Why it matters:</span> readers who rely on the schedule notice a missing day.</p>
     <p class="fixed"><span class="lbl">Fixed when:</span> issues follow the stated days, or the archive notes a missed day.</p>
   </div>
@@ -178,20 +175,20 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 
   <div class="card" id="c9">
     <h3>9. An issue page doesn't say which issue it is</h3>
-    <p class="where">Issue pages, e.g. /archive/264/ · computer and phone</p>
+    <p class="where">Issue pages, e.g. <a href="https://observatory.mgorsky.net/archive/264/" target="_blank" rel="noopener">/archive/264/</a> · computer and phone</p>
     <p><span class="lbl">What we saw:</span> on 11 of 12 issue pages, the page starts with "← The archive" and the group name. The issue's name and date ("Ethiopia daily brief, 29-Oct-26") are only in the browser tab. The only date on the page is the header, "Tuesday, 24 November 2026". There is no link to the previous or next issue.</p>
-    <figure><img src="img/issue-top.png" alt="An October issue page whose only visible date is Tuesday, 24 November 2026"><figcaption>/archive/264/, an October issue. The only date shown is today's.</figcaption></figure>
+    <figure><img src="img/issue-top.png" alt="An October issue page whose only visible date is Tuesday, 24 November 2026"><figcaption><a href="https://observatory.mgorsky.net/archive/264/" target="_blank" rel="noopener">/archive/264/</a>, an October issue. The only date shown is today's.</figcaption></figure>
     <p><span class="lbl">Why it matters:</span> an old issue reads as today's news.</p>
     <p class="fixed"><span class="lbl">Fixed when:</span> each issue starts with its name and date, with previous and next links. That heading would also give these pages the main heading they lack (see the last section).</p>
   </div>
 
   <div class="card" id="c10">
     <h3>10. Old leads come back, and Science corner entries look the same</h3>
-    <p class="where">/ethiopia/, /ai-science-corner/, /archive/ · computer</p>
+    <p class="where"><a href="https://observatory.mgorsky.net/ethiopia/" target="_blank" rel="noopener">/ethiopia/</a>, <a href="https://observatory.mgorsky.net/ai-science-corner/" target="_blank" rel="noopener">/ai-science-corner/</a>, <a href="https://observatory.mgorsky.net/archive/" target="_blank" rel="noopener">/archive/</a> · computer</p>
     <p><span class="lbl">What we saw:</span> "Awash Bank applies for Djibouti banking licence" leads the Ethiopia daily brief on 2 November and Ethiopian banking and fintech on 13 November. "National Bank of Ethiopia issues Directive No. FS/01/2026" leads the brief on 18 November and banking on 20 November. Two more leads repeat between AI daily and Podcasts on the same day. All 8 Science corner issues show the same line: "Research papers of the week on AI and the fields around it…".</p>
     <div class="pair">
-      <figure><img src="img/old-lead.png" alt="Ethiopia page listing the Awash Bank story as a lead"><figcaption>/ethiopia/: the Awash Bank lead.</figcaption></figure>
-      <figure class="narrow"><img src="img/science-archive.png" alt="Science corner issues in the archive, all with the same summary"><figcaption>/archive/ filtered to Science corner on a phone.</figcaption></figure>
+      <figure><img src="img/old-lead.png" alt="Ethiopia page listing the Awash Bank story as a lead"><figcaption><a href="https://observatory.mgorsky.net/ethiopia/" target="_blank" rel="noopener">/ethiopia/</a>: the Awash Bank lead.</figcaption></figure>
+      <figure class="narrow"><img src="img/science-archive.png" alt="Science corner issues in the archive, all with the same summary"><figcaption><a href="https://observatory.mgorsky.net/archive/" target="_blank" rel="noopener">/archive/</a> filtered to Science corner on a phone.</figcaption></figure>
     </div>
     <p><span class="lbl">Why it matters:</span> a repeat reads as new news, and identical entries can't be told apart.</p>
     <p class="fixed"><span class="lbl">Fixed when:</span> a repeat lead is marked ("first reported 2 Nov") or skipped, and each Science corner entry shows its top paper.</p>
@@ -199,9 +196,9 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 
   <div class="card" id="c11">
     <h3>11. The Ethiopia AI weekly is short and repeats itself</h3>
-    <p class="where">/archive/169/ and the Ethiopia AI weekly issues · computer</p>
-    <p><span class="lbl">What we saw:</span> 3 of its last 4 issues have 1 to 3 stories ("1 stories" on 11 Nov). In /archive/169/, one event appears twice: "Ethiopia Seeks Partner Support for AI Institutions at Bangkok Roundtable" (Tigist Fisseha) and "Ethiopia Joins AI Roundtable at IMF and World Bank Meetings" (Tiguist Fisseha), the same person spelled two ways. A recent lead is about a blockchain AI hub (OpenGradient), not Ethiopia.</p>
-    <figure><img src="img/ethiopia-dup.png" alt="Issue 169 with two stories about the same roundtable"><figcaption>/archive/169/: the same roundtable told twice.</figcaption></figure>
+    <p class="where"><a href="https://observatory.mgorsky.net/archive/169/" target="_blank" rel="noopener">/archive/169/</a> and the Ethiopia AI weekly issues · computer</p>
+    <p><span class="lbl">What we saw:</span> 3 of its last 4 issues have 1 to 3 stories ("1 stories" on 11 Nov). In <a href="https://observatory.mgorsky.net/archive/169/" target="_blank" rel="noopener">/archive/169/</a>, one event appears twice: "Ethiopia Seeks Partner Support for AI Institutions at Bangkok Roundtable" (Tigist Fisseha) and "Ethiopia Joins AI Roundtable at IMF and World Bank Meetings" (Tiguist Fisseha), the same person spelled two ways. A recent lead is about a blockchain AI hub (OpenGradient), not Ethiopia.</p>
+    <figure><img src="img/ethiopia-dup.png" alt="Issue 169 with two stories about the same roundtable"><figcaption><a href="https://observatory.mgorsky.net/archive/169/" target="_blank" rel="noopener">/archive/169/</a>: the same roundtable told twice.</figcaption></figure>
     <p><span class="lbl">Why it matters:</span> how many stories a weekly should have is your call. The duplicates and the off-topic lead are the parts a reader will notice.</p>
     <p class="fixed"><span class="lbl">Fixed when:</span> one event appears once per issue, leads match the desk's topic, and counts read "1 story".</p>
   </div>
@@ -212,7 +209,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 
   <div class="card" id="c12">
     <h3>12. The Russian lists differ from the English ones</h3>
-    <p class="where">/ru/agentic-software-engineering/ vs /agentic-software-engineering/ · computer</p>
+    <p class="where"><a href="https://observatory.mgorsky.net/ru/agentic-software-engineering/" target="_blank" rel="noopener">/ru/agentic-software-engineering/</a> vs <a href="https://observatory.mgorsky.net/agentic-software-engineering/" target="_blank" rel="noopener">/agentic-software-engineering/</a> · computer</p>
     <p><span class="lbl">What we saw:</span> both pages list the same issues, but 10 of 11 show a different lead story. Issue 471 leads with "OpenAI says Codex found the root cause…" in English and "CodeRabbit launches public beta of Verify…" in Russian. 5 Russian leads are in English. Issue 344 is dated 10 November in English and 9 November in Russian.</p>
     <div class="pair">
       <figure><img src="img/en-agentic.png" alt="English group page, issue 471 led by the OpenAI Codex story"><figcaption>English.</figcaption></figure>
@@ -224,28 +221,28 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 
   <div class="card" id="c13">
     <h3>13. English words left on Russian pages</h3>
-    <p class="where">/ru/archive/, /ru/, /ru/india/ · computer</p>
-    <p><span class="lbl">What we saw:</span> /ru/archive/ says "N stories" in English 132 times. /ru/india/ has the heading "The publications". /ru/ has "Industry / Отчет Tracxn" where other categories are Russian ("Компании /"), and a Spanish word: "Модели visión-язык".</p>
+    <p class="where"><a href="https://observatory.mgorsky.net/ru/archive/" target="_blank" rel="noopener">/ru/archive/</a>, <a href="https://observatory.mgorsky.net/ru/" target="_blank" rel="noopener">/ru/</a>, <a href="https://observatory.mgorsky.net/ru/india/" target="_blank" rel="noopener">/ru/india/</a> · computer</p>
+    <p><span class="lbl">What we saw:</span> <a href="https://observatory.mgorsky.net/ru/archive/" target="_blank" rel="noopener">/ru/archive/</a> says "N stories" in English 132 times. <a href="https://observatory.mgorsky.net/ru/india/" target="_blank" rel="noopener">/ru/india/</a> has the heading "The publications". <a href="https://observatory.mgorsky.net/ru/" target="_blank" rel="noopener">/ru/</a> has "Industry / Отчет Tracxn" where other categories are Russian ("Компании /"), and a Spanish word: "Модели visión-язык".</p>
     <div class="pair">
-      <figure><img src="img/ru-stories.png" alt="Russian archive with counts in English"><figcaption>/ru/archive/: "stories" in English.</figcaption></figure>
-      <figure><img src="img/ru-industry.png" alt="Russian front page with an English category label Industry"><figcaption>/ru/: "Industry /".</figcaption></figure>
+      <figure><img src="img/ru-stories.png" alt="Russian archive with counts in English"><figcaption><a href="https://observatory.mgorsky.net/ru/archive/" target="_blank" rel="noopener">/ru/archive/</a>: "stories" in English.</figcaption></figure>
+      <figure><img src="img/ru-industry.png" alt="Russian front page with an English category label Industry"><figcaption><a href="https://observatory.mgorsky.net/ru/" target="_blank" rel="noopener">/ru/</a>: "Industry /".</figcaption></figure>
     </div>
     <p class="fixed"><span class="lbl">Fixed when:</span> these strings are Russian, with Russian plural forms for the counts.</p>
   </div>
 
   <div class="card" id="c14">
     <h3>14. The Russian logo is cut off on a phone</h3>
-    <p class="where">/ru/ · phone, 390 px</p>
+    <p class="where"><a href="https://observatory.mgorsky.net/ru/" target="_blank" rel="noopener">/ru/</a> · phone, 390 px</p>
     <p><span class="lbl">What we saw:</span> the logo is 403 px wide on a 390 px screen. The "t" and the "y" are cut. The English logo fits.</p>
-    <figure class="narrow"><img src="img/ru-phone.png" alt="Russian front page on a phone with the logo cut at both edges"><figcaption>/ru/ on a phone.</figcaption></figure>
-    <p class="fixed"><span class="lbl">Fixed when:</span> the logo fits inside the screen on /ru/, as on /.</p>
+    <figure class="narrow"><img src="img/ru-phone.png" alt="Russian front page on a phone with the logo cut at both edges"><figcaption><a href="https://observatory.mgorsky.net/ru/" target="_blank" rel="noopener">/ru/</a> on a phone.</figcaption></figure>
+    <p class="fixed"><span class="lbl">Fixed when:</span> the logo fits inside the screen on <a href="https://observatory.mgorsky.net/ru/" target="_blank" rel="noopener">/ru/</a>, as on /.</p>
   </div>
 
   <div class="card" id="c15">
     <h3>15. Small filter buttons and broken dates on the phone archive</h3>
-    <p class="where">/archive/ · phone, 390 px</p>
+    <p class="where"><a href="https://observatory.mgorsky.net/archive/" target="_blank" rel="noopener">/archive/</a> · phone, 390 px</p>
     <p><span class="lbl">What we saw:</span> the 10 filter buttons are 34 px tall. The filters work and the selected one is clear. Dates break in the middle: "Dispatches from Others, 2-" on one line and "Nov-26" on the next.</p>
-    <figure class="narrow"><img src="img/taps.png" alt="Phone archive with filter buttons and a date split across two lines"><figcaption>/archive/ on a phone. The buttons are 34 px tall. Apple suggests at least 44, Google 48.</figcaption></figure>
+    <figure class="narrow"><img src="img/taps.png" alt="Phone archive with filter buttons and a date split across two lines"><figcaption><a href="https://observatory.mgorsky.net/archive/" target="_blank" rel="noopener">/archive/</a> on a phone. The buttons are 34 px tall. Apple suggests at least 44, Google 48.</figcaption></figure>
     <p class="fixed"><span class="lbl">Fixed when:</span> the buttons are about 44 px tall and each date stays on one line.</p>
   </div>
 </section>
@@ -256,22 +253,22 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 
   <div class="card" id="d1">
     <h3>The visitor counter stops with an error</h3>
-    <p class="where">14 pages, including /, /about/ and the topic pages · computer and phone</p>
+    <p class="where">14 pages, including /, <a href="https://observatory.mgorsky.net/about/" target="_blank" rel="noopener">/about/</a> and the topic pages · computer and phone</p>
     <p><span class="lbl">What we saw:</span> the page's script stops with <code>goatcounter.count is not a function</code>. Nothing on the screen shows it, so there is no screenshot. The Privacy page says the site counts visits with GoatCounter.</p>
     <p class="fixed"><span class="lbl">Fixed when:</span> the error is gone from the browser console and visits appear in GoatCounter.</p>
   </div>
 
   <div class="card" id="d2">
     <h3>The Privacy page slides sideways on a phone</h3>
-    <p class="where">/privacy/ · phone, 390 px</p>
+    <p class="where"><a href="https://observatory.mgorsky.net/privacy/" target="_blank" rel="noopener">/privacy/</a> · phone, 390 px</p>
     <p><span class="lbl">What we saw:</span> a long web address is wider than the screen, so the page moves left and right.</p>
-    <figure class="narrow"><img src="img/privacy.png" alt="Privacy page on a phone"><figcaption>/privacy/ on a phone.</figcaption></figure>
+    <figure class="narrow"><img src="img/privacy.png" alt="Privacy page on a phone"><figcaption><a href="https://observatory.mgorsky.net/privacy/" target="_blank" rel="noopener">/privacy/</a> on a phone.</figcaption></figure>
     <p class="fixed"><span class="lbl">Fixed when:</span> long addresses wrap and the page no longer scrolls sideways.</p>
   </div>
 
   <div class="card" id="d3">
     <h3>Four pages have no main heading</h3>
-    <p class="where">/, /ru/, /archive/472/, /ru/archive/472/</p>
+    <p class="where">/, <a href="https://observatory.mgorsky.net/ru/" target="_blank" rel="noopener">/ru/</a>, <a href="https://observatory.mgorsky.net/archive/472/" target="_blank" rel="noopener">/archive/472/</a>, <a href="https://observatory.mgorsky.net/ru/archive/472/" target="_blank" rel="noopener">/ru/archive/472/</a></p>
     <p><span class="lbl">What we saw:</span> these pages have no top-level heading. On the front page the logo picture is the only title. Screen readers and search engines use that heading to tell what a page is. It is not visible, so there is no screenshot.</p>
     <p class="fixed"><span class="lbl">Fixed when:</span> each page has one main heading (card 9's issue heading would cover the issue pages).</p>
   </div>
@@ -285,12 +282,12 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 </main>
 
 <footer>
-  <p>Happy Path is run by Podway. This page has no links to it from anywhere and asks search engines not to list it. Anyone with the link can open it.</p>
+  <p>This page has no links to it from anywhere and asks search engines not to list it. Anyone with the link can open it.</p>
 </footer>
 <script>
-(function(){var b=document.getElementById("theme"),l=document.getElementById("theme-l"),r=document.documentElement;
+(function(){var b=document.getElementById("theme"),r=document.documentElement;
 function cur(){return r.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}
-function lab(){l.textContent=cur()==="dark"?"Light":"Dark"}
+function lab(){var d=cur()==="dark";document.getElementById("i-moon").style.display=d?"none":"block";document.getElementById("i-sun").style.display=d?"block":"none";b.setAttribute("aria-label",d?"Switch to light theme":"Switch to dark theme")}
 b.addEventListener("click",function(){var n=cur()==="dark"?"light":"dark";r.dataset.theme=n;try{localStorage.setItem("hp-theme",n)}catch(e){}lab()});lab();})();
 </script>
 </body>
