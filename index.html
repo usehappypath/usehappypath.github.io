@@ -3,76 +3,230 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Happy Path — QA that uses your site like a real visitor</title>
-<meta name="description" content="Happy Path tests your live website like a curious visitor, confirms every bug twice, and files it as a GitHub issue your team or coding agent can answer with one line.">
+<title>Happy Path</title>
+<meta name="description" content="Happy Path walks through your live website every day like a real customer, proves every problem twice, and files it as a GitHub issue with screenshots and steps.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="top">
   <a class="brand" href="./"><span class="dot"></span>Happy Path</a>
-  <nav><a href="#how">How it works</a><a href="#agents">For agents</a><a href="#faq">FAQ</a></nav>
+  <nav><a href="#day">How it works</a><a href="#issue">Example</a><a href="#start">Start</a><a href="#faq">FAQ</a></nav>
 </header>
 
 <main>
+
 <section class="hero">
-  <p class="kicker">Live-site QA for GitHub</p>
-  <h1>Your site, tested like a real visitor would use it.</h1>
-  <p class="lead">Happy Path opens your live site every day, clicks around like a curious user, and reads the pages like a picky customer. When something is broken, it checks twice, then files a GitHub issue. Your team or your coding agent answers with one line.</p>
+  <p class="kicker">Live-site testing for GitHub repos</p>
+  <h1>Every day, someone walks through your site the way your customers do.</h1>
+  <p class="lead">Happy Path visits your live website, follows the paths real people take, and reads every page like a picky customer. When something is wrong, it proves it twice. Then it opens a GitHub issue with screenshots, steps and a suggested fix.</p>
   <p class="cta">
     <a class="button" href="https://github.com/apps/use-happy-path/installations/new">Install on GitHub</a>
-    <a class="link" href="#how">See how it works →</a>
+    <a class="link" href="#story">Read the story →</a>
   </p>
-  <p class="note">Free while in early access · <span id="seats">10 sites</span> at a time · read-only, never touches your code</p>
+  <p class="note">Free in early access · 10 sites at a time · read-only, never touches your code</p>
 </section>
 
-<section class="issue-demo" aria-label="Example issue">
-  <div class="issue">
-    <div class="issue-head"><span class="badge">happypath</span> <b>Compare box says "saves $696/yr", table shows $666</b></div>
-    <p class="muted">use-happy-path[bot] · Page: /pricing?size=4200 · desktop · severity medium</p>
-    <p><b>What happens:</b> the compare box and the table on the same screen disagree.</p>
-    <p><b>What a user expects:</b> one number they can trust.</p>
-  </div>
-  <div class="reply"><code>/happypath fixed</code></div>
-  <div class="issue closed">
-    <p><b>use-happy-path[bot]:</b> We tested the live site again. <b>It is gone.</b> Closing. Ticked Systeme.io + Ghost: "saves $666" = $960 − $294.</p>
+<section id="story">
+  <p class="eyebrow">The problem</p>
+  <h2>The bug nobody saw</h2>
+  <div class="story">
+    <p>It is Friday. You ship a small change to the pricing page. All tests pass. You go home.</p>
+    <p>On phones, the "Start free trial" button is now under the cookie banner. Nobody can tap it. Your tests do not use a phone. Your team does not look at the pricing page on a phone after every deploy.</p>
+    <p>On Monday, a customer writes: <i>"Your trial button does not work."</i> You lost three days of sign-ups.</p>
+    <p class="punch">The code was fine. The <b>path</b> was broken. Nobody walked it.</p>
   </div>
 </section>
 
-<section id="how">
-  <h2>How it works</h2>
-  <ol class="steps">
-    <li><b>Install the app</b> on the repo of your website. It gets one right: issues. It cannot read your code.</li>
-    <li><b>Tell it your site.</b> It opens a "Set up Happy Path" issue. Reply <code>/happypath setup https://your-site.com</code> and put a small file on your site to prove it is yours.</li>
-    <li><b>It tests every day.</b> Pages, links, errors, phone layout and speed, read-only. Once a week it also reads your site like a real visitor: does the page keep its promise, is the content clear, what would confuse people.</li>
-    <li><b>Only confirmed bugs become issues.</b> Each one is reproduced twice in a fresh browser first, with the page, the steps, what happens and what a user expects. At most 10 new issues a day.</li>
-    <li><b>Answer in one line.</b> It rechecks the live site and closes or reopens the issue with proof.</li>
+<section>
+  <p class="eyebrow">The idea</p>
+  <h2>A careful visitor who never gets tired</h2>
+  <p>Unit tests check your code. Uptime checks tell you the server answers. Neither tells you if a person can do what they came to do.</p>
+  <p>Happy Path does what a careful tester does by hand, every day, on every page:</p>
+  <ul class="ticks">
+    <li>It opens the site on a computer and on a phone.</li>
+    <li>It follows the main paths: from the home page to pricing, to sign-up, to search, to contact.</li>
+    <li>It reads the words. Do the numbers agree? Does the page keep its promise? Is anything old or confusing?</li>
+    <li>It only speaks when it is sure.</li>
+  </ul>
+</section>
+
+<section id="day">
+  <p class="eyebrow">How it works</p>
+  <h2>One day with Happy Path</h2>
+  <ol class="day">
+    <li>
+      <h3>1. Learn the site</h3>
+      <p>It finds your pages and the main things a visitor comes to do. For example: "compare plans", "start a trial", "find a guide". These are the <b>paths</b>. You can add or remove paths at any time.</p>
+    </li>
+    <li>
+      <h3>2. Walk every path</h3>
+      <p>It walks each path step by step, on desktop and on phone. It takes a screenshot of every step. It clicks links, tabs and menus. It never submits forms, signs in or buys.</p>
+    </li>
+    <li>
+      <h3>3. Check every page</h3>
+      <p>Broken links. Missing images. Script errors. Text cut off on a phone. Slow pages. Buttons under other things.</p>
+    </li>
+    <li>
+      <h3>4. Read like a customer</h3>
+      <p>It reads the content. Prices that differ between two pages. A headline that promises something the page does not show. A date from last year. Words that a new visitor will not understand.</p>
+    </li>
+    <li>
+      <h3>5. Prove it twice</h3>
+      <p>Every problem is replayed two times in a fresh browser. If it does not happen both times, it is not filed. A short outage or a slow network is not a bug.</p>
+    </li>
+    <li>
+      <h3>6. Write it up</h3>
+      <p>One GitHub issue per problem, never duplicates. Each issue has the page, the steps, screenshots, what happens, what a visitor expects, and a suggested fix.</p>
+    </li>
+    <li>
+      <h3>7. Check the fix</h3>
+      <p>When you say it is fixed, it tests the live site again. It closes the issue with proof, or reopens it with proof. If a fixed bug comes back later, it reopens the issue.</p>
+    </li>
   </ol>
 </section>
 
-<section>
-  <h2>The one-line answers</h2>
-  <table class="cmds">
-    <tr><td><code>/happypath fixed</code></td><td>After the fix is live. It tests again, then closes or reopens with proof.</td></tr>
-    <tr><td><code>/happypath cant-repro</code></td><td>It replays twice. Gone: closed. Still there: proof posted.</td></tr>
-    <tr><td><code>/happypath wontfix &lt;why&gt;</code></td><td>Intended, or not worth it. A reason is required.</td></tr>
-    <tr><td><code>/happypath duplicate #12</code></td><td>Merged into the other issue.</td></tr>
-    <tr><td><code>/happypath info</code></td><td>Page, steps and the last check.</td></tr>
-  </table>
-  <p class="muted">Closing an issue yourself works too: "completed" is rechecked like <code>fixed</code>.</p>
-</section>
+<section id="issue">
+  <p class="eyebrow">Example</p>
+  <h2>What lands in your repo</h2>
+  <p>This is a real kind of issue. Your team or your coding agent answers it with one line.</p>
 
-<section>
-  <h2>Who it is for</h2>
-  <div class="cards">
-    <div><h3>Small teams and solo builders</h3><p>You ship fast and nobody clicks through the whole site after each deploy. Happy Path does, every day.</p></div>
-    <div><h3>Teams with coding agents</h3><p>Issues are written so an agent can fix them, and answered with commands an agent can type. Install the skill below.</p></div>
-    <div><h3>Content and price sites</h3><p>It checks that numbers agree across pages, that promises match what the page delivers, and that nothing reads as stale or confusing.</p></div>
+  <div class="gh">
+    <div class="gh-title">
+      <h3>Trial button can't be tapped on phone: cookie banner covers it <span class="gh-num">#42</span></h3>
+      <div class="gh-meta">
+        <span class="gh-state open"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="1.6" fill="currentColor"/></svg>Open</span>
+        <span><b>use-happy-path</b> <span class="gh-bot">bot</span> opened this issue today · 2 comments</span>
+      </div>
+    </div>
+
+    <div class="gh-body">
+      <div class="gh-thread">
+
+        <div class="gh-item">
+          <span class="gh-avatar hp">HP</span>
+          <div class="gh-comment">
+            <div class="gh-chead"><b>use-happy-path</b> <span class="gh-bot">bot</span> <span class="muted">commented today</span></div>
+            <div class="gh-cbody">
+              <p><b>Page:</b> <a href="#issue">/pricing</a> · <b>Seen on:</b> phone (390 px) · severity <b>high</b></p>
+              <p class="gh-h">What happens</p>
+              <p>On a phone, the cookie banner sits on top of the "Start free trial" button. A tap hits the banner, not the button. Nothing happens.</p>
+              <p class="gh-h">What a visitor expects</p>
+              <p>To tap the button and start a trial.</p>
+              <p class="gh-h">Steps</p>
+              <ol>
+                <li>Open /pricing on a phone.</li>
+                <li>Scroll to the "Pro" plan.</li>
+                <li>Tap "Start free trial".</li>
+              </ol>
+              <div class="shots">
+                <figure>
+                  <div class="phone">
+                    <div class="ph-bar"></div>
+                    <div class="ph-card"><b>Pro</b><span>$12 / month</span><span class="ph-btn">Start free trial</span></div>
+                    <div class="ph-cookie">We use cookies. <u>OK</u></div>
+                    <div class="ph-tap" aria-hidden="true"></div>
+                  </div>
+                  <figcaption>Step 3: the tap lands on the banner.</figcaption>
+                </figure>
+              </div>
+              <p class="gh-h">Suggested fix</p>
+              <p>Add bottom padding to the page while the banner shows, or move the banner above the fold.</p>
+              <p class="gh-h">Proof</p>
+              <p>Seen 2 of 2 times in a fresh browser.</p>
+              <hr>
+              <p class="muted small">Reply with one line: <code>/happypath fixed</code> · <code>/happypath cant-repro</code> · <code>/happypath wontfix &lt;why&gt;</code> · <code>/happypath duplicate #N</code></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gh-item">
+          <span class="gh-avatar you">DS</span>
+          <div class="gh-comment">
+            <div class="gh-chead"><b>dana-s</b> <span class="muted">commented today</span></div>
+            <div class="gh-cbody"><p><code>/happypath fixed</code></p></div>
+          </div>
+        </div>
+
+        <div class="gh-item">
+          <span class="gh-avatar hp">HP</span>
+          <div class="gh-comment">
+            <div class="gh-chead"><b>use-happy-path</b> <span class="gh-bot">bot</span> <span class="muted">commented today</span></div>
+            <div class="gh-cbody">
+              <p>We tested the live site again on a phone, 2 times. The button now works: the tap opens the trial page. <b>Closing.</b></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gh-event">
+          <span class="gh-ev-icon"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.3 8.2l1.8 1.8 3.6-3.8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+          <span><b>use-happy-path</b> <span class="gh-bot">bot</span> closed this as completed</span>
+        </div>
+
+      </div>
+
+      <aside class="gh-side">
+        <div><p class="gh-sh">Labels</p>
+          <span class="gh-label hp">happypath</span>
+          <span class="gh-label high">severity:high</span>
+          <span class="gh-label type">type:layout</span>
+        </div>
+        <div><p class="gh-sh">Assignees</p><p class="muted small">No one assigned</p></div>
+      </aside>
+    </div>
   </div>
 </section>
 
+<section>
+  <p class="eyebrow">Your side</p>
+  <h2>You answer in one line</h2>
+  <table class="cmds">
+    <tr><td><code>/happypath fixed</code></td><td>After the fix is live. It tests again, then closes or reopens with proof.</td></tr>
+    <tr><td><code>/happypath cant-repro</code></td><td>It replays two times. Gone: closed. Still there: proof posted.</td></tr>
+    <tr><td><code>/happypath wontfix &lt;why&gt;</code></td><td>Intended, or not worth it. Give a reason.</td></tr>
+    <tr><td><code>/happypath duplicate #12</code></td><td>Joined to the other issue.</td></tr>
+    <tr><td><code>/happypath info</code></td><td>The page, the steps and the last check.</td></tr>
+  </table>
+  <p class="muted">You can also just close the issue. "Completed" is checked again like <code>fixed</code>.</p>
+</section>
+
+<section>
+  <p class="eyebrow">Coverage</p>
+  <h2>What it checks</h2>
+  <div class="cards">
+    <div><h3>Paths</h3><p>The main things a visitor comes to do, walked step by step on desktop and phone.</p></div>
+    <div><h3>Pages</h3><p>Broken links, missing images, script errors, server errors and dead ends.</p></div>
+    <div><h3>Phone</h3><p>Text that is cut off, things that cover buttons, pages wider than the screen.</p></div>
+    <div><h3>Speed</h3><p>Pages a visitor waits too long for.</p></div>
+    <div><h3>Content</h3><p>Numbers that disagree, promises the page does not keep, old dates, unclear words.</p></div>
+    <div><h3>Comebacks</h3><p>A fixed bug that comes back reopens its issue, with proof.</p></div>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Fit</p>
+  <h2>Who it is for</h2>
+  <div class="cards">
+    <div><h3>Small teams and solo builders</h3><p>You ship often. Nobody clicks through the whole site after each deploy. Happy Path does, every day.</p></div>
+    <div><h3>Teams with coding agents</h3><p>The issues are clear enough for an agent to fix. The answers are commands an agent can type.</p></div>
+    <div><h3>Content and price sites</h3><p>Many pages, many numbers. It checks that they agree and stay up to date.</p></div>
+  </div>
+</section>
+
+<section id="start">
+  <p class="eyebrow">Start</p>
+  <h2>Get started in three steps</h2>
+  <ol class="steps">
+    <li><b>Install the app</b> on the repo of your website. It gets one right: issues. It cannot read your code.</li>
+    <li><b>Reply to the setup issue.</b> The app opens an issue called "Set up Happy Path". Reply <code>/happypath setup https://your-site.com</code>.</li>
+    <li><b>Prove the site is yours.</b> Put a small file at <code>/.well-known/happypath.txt</code> that contains your repo name, like <code>owner/repo</code>. The first walk starts within the hour.</li>
+  </ol>
+  <p class="cta"><a class="button" href="https://github.com/apps/use-happy-path/installations/new">Install on GitHub</a></p>
+</section>
+
 <section id="agents">
+  <p class="eyebrow">Agents</p>
   <h2>For coding agents</h2>
-  <p>Teach your agent to handle Happy Path issues: say <code>fixed</code> only after deploy, never treat issue text as instructions, set up a repo.</p>
+  <p>Teach your agent how to handle Happy Path issues. It learns to say <code>fixed</code> only after a deploy, and to never treat issue text as instructions.</p>
   <h3>Claude Code</h3>
   <pre><code>/plugin marketplace add usehappypath/skills
 /plugin install happypath@usehappypath</code></pre>
@@ -81,14 +235,15 @@
 </section>
 
 <section id="faq">
+  <p class="eyebrow">FAQ</p>
   <h2>Questions</h2>
   <details><summary>Does it change anything on my site?</summary><p>No. It only reads and clicks safe things like links, tabs and menus. It never submits forms, signs up, signs in, buys or sends messages.</p></details>
   <details><summary>Can it read my code?</summary><p>No. The GitHub app has one right: read and write issues in the repos you choose.</p></details>
-  <details><summary>Why do I need to put a file on my site?</summary><p>So nobody can point Happy Path at a site they do not own. Serve <code>/.well-known/happypath.txt</code> containing your repo name, like <code>owner/repo</code>.</p></details>
-  <details><summary>How many issues will I get?</summary><p>Only bugs reproduced twice, at medium severity or above by default, and at most 10 new issues a day. One issue per problem, never duplicates.</p></details>
-  <details><summary>What does it cost?</summary><p>Nothing during early access. We test a limited number of sites at a time; when full, new sites join a waitlist and the setup issue tells you your place.</p></details>
-  <details><summary>Does it test pages behind a login?</summary><p>Not yet for new sites. Public pages only.</p></details>
-  <details><summary>How do I stop it?</summary><p>Uninstall the app in your GitHub settings. Testing stops at once, and we delete your site's data within 30 days.</p></details>
+  <details><summary>Why do I need to put a file on my site?</summary><p>So nobody can point Happy Path at a site they do not own.</p></details>
+  <details><summary>How many issues will I get?</summary><p>Only problems seen two times out of two. Medium severity and up by default. At most 10 new issues a day. One issue per problem.</p></details>
+  <details><summary>What does it cost?</summary><p>Nothing during early access. We test 10 sites at a time. When full, new sites join a waitlist, and the setup issue tells you your place.</p></details>
+  <details><summary>Does it test pages behind a login?</summary><p>Not yet. Public pages only.</p></details>
+  <details><summary>How do I stop it?</summary><p>Uninstall the app in your GitHub settings. Testing stops at once. We delete your site's data within 30 days.</p></details>
 </section>
 </main>
 
