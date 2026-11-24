@@ -111,3 +111,25 @@ footer{max-width:880px;margin:0 auto;padding:32px 16px 48px;color:var(--muted);f
 .ph-tap{position:absolute;left:84px;bottom:104px;width:26px;height:26px;border-radius:50%;border:3px solid #e5484d;background:rgba(229,72,77,.25)}
 @media (max-width:720px){.gh{padding:14px}.gh-body{grid-template-columns:1fr}.gh-side{order:-1;display:flex;gap:16px;flex-wrap:wrap}.gh-side>div{border:0;margin:0;padding:0}.gh-avatar{flex-basis:32px;height:32px;font-size:11px}.gh-event{margin-left:44px}.gh-title h3{font-size:20px}}
 @media (max-width:560px){.top nav a[href="#issue"],.top nav a[href="#faq"]{display:none}.top nav a{white-space:nowrap}}
+/* blog */
+.post{max-width:720px}
+.post h1{font-size:clamp(30px,5vw,44px)}
+.post .meta{color:var(--muted);font-size:15px;margin:0 0 28px}
+.post section{padding:28px 0}
+.post p,.post li{max-width:680px}
+.tbl{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:10px}
+.tbl table{border-collapse:collapse;width:100%;font-size:14px;min-width:760px}
+.tbl th,.tbl td{text-align:left;vertical-align:top;padding:9px 10px;border-bottom:1px solid var(--line)}
+.tbl th{background:var(--code);font-weight:600;position:sticky;top:0}
+.tbl tr.us td{background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.tbl td:first-child{font-weight:600;white-space:nowrap}
+.callout{border-left:3px solid var(--accent);padding:4px 0 4px 16px;margin:18px 0}
+.sources{font-size:14px;color:var(--muted)}
+.sources li{margin:4px 0}
+.postlist a{font-weight:600}
+.tbl td:first-child,.tbl th:first-child{position:sticky;left:0;background:var(--bg);z-index:1;white-space:normal;min-width:96px;box-shadow:1px 0 0 var(--line)}
+.tbl th:first-child{background:var(--code);z-index:2}
+.tbl tr.us td:first-child{background:color-mix(in srgb,var(--accent) 10%,var(--bg))}
+.swipe{display:none;font-size:13px;color:var(--muted);margin:0}
+@media (max-width:760px){.swipe{display:block}}
+.tbl.fit table{min-width:0}.tbl.fit th[scope=row]{width:38%}.tbl.fit th[scope=rowgroup]{background:var(--code)}

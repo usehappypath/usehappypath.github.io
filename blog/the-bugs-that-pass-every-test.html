@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The bugs that pass every test</title>
+<meta name="description" content="What the emailprices.com audit found about misleading prices, off-topic reviews, and the checks that catch them.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="../"><span class="dot"></span>Happy Path</a>
+  <nav><a href="../#day">How it works</a><a href="./">Blog</a><a href="../#start">Start</a></nav>
+</header>
+
+<main class="post">
+<section class="hero">
+  <p class="kicker">Blog</p>
+  <h1>The bugs that pass every test</h1>
+  <p class="meta"><time datetime="2026-11-24">24 November 2026</time> · 6 minute read</p>
+  <p class="lead">The owner of emailprices.com opened one comparison page on a phone. A quick look found <b>5 things</b> our checks had missed.</p>
+</section>
+
+<section>
+  <p class="eyebrow">The phone check</p>
+  <h2>The page worked. The price misled.</h2>
+  <p>When the owner focused the “Other” field to enter a custom list size, they saw a border inside a border. The page showed Substack at a big $0. The 10% cut of paid subscriptions sat in small print. The “Cheaper” tab used that $0 to rule out anything with a fee.</p>
+  <p>Some “What users say” threads were not about the two tools on the page. The posts showed only a title and a link. To read the opinion, you had to leave the page. Further down, “Questions” repeated what “Differences” already said.</p>
+  <p>Our automated checks had already caught some price errors. The SendPulse deal said 70% off yearly. Its pricing page said 40% less. Sender’s 15% discount was for 3 months, though the deal called it yearly. Both were fixed. We checked the live site again and closed the issues.</p>
+</section>
+
+<section>
+  <p class="eyebrow">The sweep</p>
+  <h2>One page sent us back through the site</h2>
+  <p>We checked all <b>17 compare pages</b>. On <b>10 of 17</b>, the user section had just one post. A launch post for Commune showed up across several pairs. The Mailchimp acquisition and a post about selling a Substack account appeared where readers expected opinions about the tools.</p>
+  <p>Then the owner asked the site’s coding agent to audit <b>91 pages</b>. It checked the pages against the source data and took screenshots on phones and desktops. The full audit found <b>23 bug classes</b>. Across the audit, <b>63 of 110</b> “What users say” threads failed the site’s own rule for relevance.</p>
+  <p>The site’s agent made fixes after the audit. The owner thinks most of the issues are now fixed.</p>
+</section>
+
+<section>
+  <p class="eyebrow">The findings</p>
+  <h2>Where the page gave the wrong answer</h2>
+  <p>A test could open the page, change the size, and read the new price. It could pass even when the new price sent a buyer to the wrong plan. These examples show what a reviewer had to check.</p>
+  <div class="tbl fit">
+    <table>
+      <thead><tr><th scope="col">Bug class</th><th scope="col">What we found</th></tr></thead>
+      <tbody>
+        <tr><th colspan="2" scope="rowgroup">Claims that lost their meaning</th></tr>
+        <tr><th scope="row">A badge drops a condition</th><td>Sender, Ghost and Kit rows showed a “free move” badge. Each offer had a condition: a yearly plan at 20k+, a Business plan, or a paid plan.</td></tr>
+        <tr><th scope="row">The verdict uses the wrong plan</th><td>The Ghost price comparison used the cheapest plan. Selling paid subscriptions requires Publisher.</td></tr>
+        <tr><th scope="row">The selected size looks like a limit</th><td>Brevo showed “Free plan, up to 1,000” because the visitor selected that size. Brevo states no contact cap. The limit is 300 emails a day.</td></tr>
+        <tr><th scope="row">Price history misses the latest change</th><td>A history summary showed $12 rising to $15. The current price was $18.</td></tr>
+      </tbody>
+      <tbody>
+        <tr><th colspan="2" scope="rowgroup">Content that breaks its promise</th></tr>
+        <tr><th scope="row">The FAQ and visible list disagree</th><td>The FAQ named Brevo as the cheapest Substack alternative. The visible list ranked AWeber first. Brevo cannot sell subscriptions.</td></tr>
+        <tr><th scope="row">The heading overcounts the list</th><td>A heading promised “17 recent threads.” The list was capped at 10.</td></tr>
+        <tr><th scope="row">The linked thread is off-topic</th><td>The Constant Contact page pulled in a thread from a divorce subreddit.</td></tr>
+      </tbody>
+      <tbody>
+        <tr><th colspan="2" scope="rowgroup">Screens that give the wrong impression</th></tr>
+        <tr><th scope="row">A fee sits in small print</th><td>Substack’s large $0 drew the eye first. The 10% cut of paid subscriptions was easy to miss.</td></tr>
+        <tr><th scope="row">A fee gets cut off on a phone</th><td>The audit caught fee text that ended at “10% o…” on a phone. A reader could see the rate without seeing what it applied to.</td></tr>
+        <tr><th scope="row">Focus draws two borders</th><td>The “Other” field had its own focus outline. Its box drew one too.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout"><p><b>Check what the visitor can conclude from the screen.</b> A price can match one field in the data and still give the wrong answer once you include fees or pick the plan that does the job.</p></div>
+</section>
+
+<section>
+  <p class="eyebrow">The checklist</p>
+  <h2>How to check your own site</h2>
+  <ol class="steps">
+    <li><b>Start with the source data.</b> Recompute prices, savings, limits, and verdicts using your site’s own rules. Use the plan that has the feature. Check the billing period on each side. Include fees and the latest price.</li>
+    <li><b>Read the short copy against the fine print.</b> Find the source for words like “free,” “only,” “cheapest,” and “up to.” Check when the offer applies and who can get it. Put any fee next to the main price where readers can see it.</li>
+    <li><b>Check every page that uses the template.</b> Count the items readers actually see. Look for duplicates, thin lists, and repeated sections. Open linked posts and ask if they give readers an opinion about the subject of that page.</li>
+    <li><b>Compare the visible text with JSON-LD.</b> JSON-LD is the page’s structured data. Check that prices, FAQ answers, and dates agree across both versions.</li>
+    <li><b>Walk through every state on a phone.</b> At <b>390px</b>, capture each tab and panel in light and dark mode. Focus each input and type a custom value. Check for text wider than its box and tap targets under 44px. Look at focus on desktop too.</li>
+  </ol>
+</section>
+
+<section>
+  <p class="eyebrow">Replay QA</p>
+  <h2>What another test run covered</h2>
+  <p>That evening we ran Replay QA on the same live site in read-only mode. It explored <b>33 journeys</b> and completed <b>31 runs</b> in about 1.5 hours. Its checks focused on how the site worked. They covered things like expanding sections, changing the list size, and closing a dialog with Escape. Replay is good at these checks. Its recordings let you see what happened, and its reports give a root cause.</p>
+  <ul class="ticks">
+    <li>Replay flagged the “Platforms” menu for closing on its own. We could not reproduce that on desktop. It opened on hover and stayed open in our check.</li>
+    <li>Replay also flagged that “Platforms” had no page of its own. The control is a menu button by design.</li>
+  </ul>
+  <p>Those were the <b>2 reports</b>. Our brief mentioned misleading claims, off-topic content, and focus states. The session surfaced none of the audit’s content or data issues. This was one session, and it ran after many fixes. Some of the bugs were likely already gone.</p>
+</section>
+
+<section>
+  <p class="eyebrow">Happy Path</p>
+  <h2>Every miss changes a rule</h2>
+  <p>We turned the audit classes into checks that Happy Path now applies to every site. We use the checklist when we design paths, read the pages, and brief a reviewer agent. That means a path includes focusing the field and typing a value, and a content check asks whether the price includes the fee.</p>
+  <p>We also keep a misses log. When the owner finds something we missed, we record what happened, where it happened, and which rule should have caught it. Then we change the rule.</p>
+  <p class="cta"><a class="button" href="https://github.com/apps/use-happy-path/installations/new">Install on GitHub</a></p>
+</section>
+
+<section>
+  <p class="eyebrow">Sources</p>
+  <h2>Where the findings came from</h2>
+  <ul class="sources">
+    <li>The site we swept and audited. <a href="https://emailprices.com">emailprices.com</a></li>
+    <li>The testing tool we ran that evening. <a href="https://replay.io">replay.io</a></li>
+  </ul>
+</section>
+</main>
+
+<footer>
+  <p>Happy Path is run by Podway. <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="https://github.com/usehappypath">GitHub</a></p>
+</footer>
+</body>
+</html>
