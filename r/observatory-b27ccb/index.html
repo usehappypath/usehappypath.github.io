@@ -73,7 +73,11 @@ figcaption{font-size:12.5px;color:var(--muted);margin-top:5px}
 .firstbox{border:1px solid var(--hi-bg);background:var(--card);border-left:4px solid var(--hi);border-radius:8px;padding:10px 12px;margin:0 0 10px}
 .fb-l{font:600 12px Inter;text-transform:uppercase;letter-spacing:.08em;color:var(--hi);margin-bottom:4px}
 .firstbox a{display:flex;gap:10px;align-items:baseline;min-height:36px;padding:4px 0;color:var(--fg);text-decoration:none;font-weight:500;font-size:15px}
-.dl{font-size:13.5px;color:var(--muted);margin:0 0 12px}
+.dl{font-size:14px;color:var(--muted);margin:0 0 6px}
+.introbox{margin:4px 0 0}
+.sep{border:0;border-top:1px solid var(--line);margin:26px 0 0;height:0}
+#stuck{padding-top:4px}
+#stuck .pills{margin:0 0 14px}
 details.nine{font-size:13.5px;color:var(--muted);margin:8px 0 0}details.nine summary{cursor:pointer}
 footer{color:var(--muted);font-size:13px;padding:24px 0 40px;border-top:1px solid var(--line);margin-top:30px}
 </style>
@@ -89,16 +93,15 @@ footer{color:var(--muted);font-size:13px;padding:24px 0 40px;border-top:1px soli
 <h1>The Observatory · site review</h1>
 <p class="meta"><a href="https://observatory.mgorsky.net/" target="_blank" rel="noopener">observatory.mgorsky.net</a> · 24 November 2026</p>
 <p class="intro">Happy Path tests live websites the way a visitor uses them: it follows the main paths on desktop and mobile and reads the pages. An automatic check confirms each problem twice in a fresh browser before we report it. We ran it on The Observatory in English and Russian, read-only. This page shows where a reader gets stuck, so you can decide what to fix.</p>
-<div class="firstbox"><div class="fb-l">Fix first</div>
-  <a href="#c1"><span class="num">OBS-01</span> Issue pages have no links to their sources</a>
-  <a href="#c2"><span class="num">OBS-02</span> An "author has a stake" note is missing</a>
-  <a href="#c3"><span class="num">OBS-03</span> "{labeled}" instead of a number on About</a>
+<div class="introbox">
+  <p class="dl">For your coding agent: <a href="findings.json" download>all findings as JSON</a> · <a href="findings.md" download>as Markdown</a></p>
+  <p class="dl">If you would like these as GitHub issues that are rechecked after each fix, install the Happy Path app on your GitHub repo: <a href="https://usehappypath.github.io/" target="_blank" rel="noopener">usehappypath.github.io</a>.</p>
 </div>
-<p class="dl">For your coding agent: <a href="findings.json" download>all findings as JSON</a> · <a href="findings.md" download>as Markdown</a></p>
-<div class="pills"><span class="pill">18 findings</span><span class="pill hi">3 fix first</span><span class="pill md">8 should fix</span><span class="pill lo">7 minor</span><span class="pill ok">9/9 sampled stories match their sources</span></div>
+<hr class="sep">
 
 <section id="stuck">
   <h2>Where a reader gets stuck</h2>
+  <div class="pills"><span class="pill">18 findings</span><span class="pill hi">3 fix first</span><span class="pill md">8 should fix</span><span class="pill lo">7 minor</span><span class="pill ok">9/9 sampled stories match their sources</span></div>
   <p class="tap">Tap a section or a label to jump to it.</p>
   <div class="journey">
     <div class="step"><span class="pin hi">5</span><a class="st" href="#story">Checking a story</a><div class="sd">We compared 9 sampled stories with their originals. All 9 match on numbers, names and dates.</div><div class="chips"><a class="chip hi" href="#c1">No source links</a><a class="chip hi" href="#c2">Stake note missing</a><a class="chip hi" href="#c3">“{labeled}” on About</a><a class="chip md" href="#c4">Counts too high</a><a class="chip lo" href="#c5">IPO figures need context</a></div></div><div class="step"><span class="pin md">3</span><a class="st" href="#choose">Choosing a newsletter</a><div class="chips"><a class="chip md" href="#c6">Two schedules</a><a class="chip md" href="#c7">No issue since 2 Nov</a><a class="chip lo" href="#c8">Missed days</a></div></div><div class="step"><span class="pin md">3</span><a class="st" href="#past">Browsing past issues</a><div class="chips"><a class="chip md" href="#c9">No date on issue</a><a class="chip lo" href="#c10">Old leads return</a><a class="chip md" href="#c11">Ethiopia weekly repeats</a></div></div><div class="step"><span class="pin md">4</span><a class="st" href="#ru">Reading in Russian and on mobile</a><div class="chips"><a class="chip md" href="#c12">Different leads</a><a class="chip lo" href="#c13">English left in</a><a class="chip lo" href="#c14">Logo cut off</a><a class="chip lo" href="#c15">Small buttons</a></div></div><div class="step"><span class="pin md">3</span><a class="st" href="#daily">From our earlier checks</a><div class="chips"><a class="chip md" href="#d1">Visitor counter error</a><a class="chip md" href="#d2">Privacy page slides</a><a class="chip lo" href="#d3">Missing headings</a></div></div>
@@ -303,7 +306,6 @@ footer{color:var(--muted);font-size:13px;padding:24px 0 40px;border-top:1px soli
 <section class="after">
   <h2>After changes</h2>
   <p>Tell us when you have made changes. We will run the same checks again and mark what is fixed.</p>
-  <p class="how">If you would like these as GitHub issues that are rechecked after each fix, Happy Path can do that: <a href="https://usehappypath.github.io/" target="_blank" rel="noopener">usehappypath.github.io</a>.</p>
 </section>
 </main>
 <footer>This page has no links to it from anywhere and asks search engines not to list it. Anyone with the link can open it.</footer>
