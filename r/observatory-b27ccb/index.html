@@ -23,6 +23,26 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 .toc a{text-decoration:none}
 .toc li{margin:4px 0}
 .good{background:var(--code);border-radius:12px;padding:6px 18px}
+.sum{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px 18px 16px;margin-top:8px}
+.sum h2{font-size:22px;margin:14px 0 4px}
+.sum .sub{color:var(--muted);font-size:15px;margin:0 0 14px}
+.journey{position:relative;padding-left:28px}
+.journey:before{content:"";position:absolute;left:10px;top:8px;bottom:8px;width:3px;background:var(--line);border-radius:2px}
+.step{position:relative;margin:0 0 14px}
+.pin{position:absolute;left:-28px;top:1px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 11px system-ui;color:#fff;background:var(--md)}
+.pin.ok{background:var(--ok)}.pin.hi{background:var(--hi)}
+.st{font-weight:700;font-size:16px}.sd{font-size:14px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{font-size:13.5px;border-radius:999px;padding:0 12px;min-height:44px;display:inline-flex;align-items:center;border:1.5px solid var(--line);background:var(--bg);text-decoration:none;color:inherit}
+.chip.hi{border-color:var(--hi);color:var(--hi);font-weight:600}.chip.md{border-color:var(--md)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin:6px 0 0}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:999px;border:1.5px solid var(--line);vertical-align:-2px;margin-right:5px}
+.legend .lhi{border-color:var(--hi)}.legend .lmd{border-color:var(--md)}
+.first{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:15px}
+.first a{font-weight:600}
+:root{--hi:#dc2626;--md:#d97706;--ok:#15803d}
+@media (prefers-color-scheme:dark){:root{--hi:#f87171;--md:#fbbf24;--ok:#4ade80}}
+
 </style>
 </head>
 <body>
@@ -35,10 +55,26 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
   <p class="kicker">For the team behind The Observatory</p>
   <h1>The Observatory: a reader's review</h1>
   <p class="meta">observatory.mgorsky.net · 24 November 2026</p>
-  <p class="lead">This review was made by Happy Path, the site-testing tool from Podway. We read the site the way a careful reader would and wrote down where a reader gets stuck. We only browsed. We didn't change anything or send any forms.</p>
-  <p class="note">This page has no links to it from anywhere and asks search engines not to list it. Anyone with the link can open it.</p>
+  <p class="lead">Happy Path, the site-testing tool from Podway, read your site the way a careful reader would. We only browsed. We didn't change anything or send any forms.</p>
 </section>
 
+
+<section>
+  <div class="sum">
+  <h2>Where a reader gets stuck</h2>
+  <p class="sub">We followed a reader through the site: 15 problems, 3 more from our earlier checks, and 1 clear win. Tap a label to see the details.</p>
+  <div class="journey">
+    <div class="step"><span class="pin ok">✓</span><div class="st">Read a story</div><div class="sd">9 of 9 summaries match their sources.</div></div>
+    <div class="step"><span class="pin hi">5</span><div class="st">Check where it came from</div><div class="chips"><a class="chip hi" href="#c1">No source links</a><a class="chip md" href="#c3">“{labeled}” on About</a><a class="chip md" href="#c4">Counts too high</a><a class="chip md" href="#c5">IPO figures clash</a><a class="chip " href="#c2">Stake note missing</a></div></div>
+    <div class="step"><span class="pin">3</span><div class="st">Pick a newsletter</div><div class="chips"><a class="chip md" href="#c6">Two schedules</a><a class="chip md" href="#c7">No issue since 2 Nov</a><a class="chip " href="#c8">Missed days</a></div></div>
+    <div class="step"><span class="pin">3</span><div class="st">Look at past issues</div><div class="chips"><a class="chip md" href="#c11">Ethiopia weekly repeats</a><a class="chip " href="#c9">No date on issue</a><a class="chip " href="#c10">Old leads return</a></div></div>
+    <div class="step"><span class="pin">4</span><div class="st">Switch to Russian, use a phone</div><div class="chips"><a class="chip md" href="#c12">Different leads</a><a class="chip " href="#c13">English left in</a><a class="chip " href="#c14">Logo cut off</a><a class="chip " href="#c15">Small buttons</a></div></div>
+    <div class="step"><span class="pin">3</span><div class="st">Behind the scenes</div><div class="chips"><a class="chip md" href="#d1">Visitor counter error</a><a class="chip md" href="#d2">Privacy page slides</a><a class="chip " href="#d3">Missing headings</a></div></div>
+  </div>
+  <div class="legend"><span><i class="lhi"></i>hurts trust</span><span><i class="lmd"></i>confuses readers</span><span><i></i>small</span></div>
+  <p class="first"><b>Fix these 3 first:</b> <a href="#c1">source links on issue pages</a>, <a href="#c3">the “{labeled}” placeholder</a>, <a href="#c4">the story counts</a>.</p>
+  </div>
+</section>
 <section>
   <h2>What we checked</h2>
   <p>On 24 November 2026 we loaded 71 pages over 12 minutes, on a computer (1280 px wide) and a phone (390 px), in English and in Russian. We did not test sign-up, email delivery, Telegram, dark mode or keyboard focus.</p>
@@ -59,7 +95,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 <section id="story">
   <h2>Checking a story</h2>
 
-  <div class="card">
+  <div class="card" id="c1">
     <h3>1. Issue pages have no links to the sources</h3>
     <p class="where">Issue pages, e.g. /archive/472/ · computer and phone</p>
     <p><span class="lbl">What we saw:</span> source names are plain text, such as "TechCrunch; also Bloomberg Technology". Story titles are not links. We counted the links in 8 issues from October and November: all 8 had none. The issue of 29 September has 80 links for 40 stories, and the Notes essay /archive/471/ has 48. Science corner papers have no link to the paper anywhere on the site.</p>
@@ -68,7 +104,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
     <p class="fixed"><span class="lbl">Fixed when:</span> each story on an issue page links to its original, as /archive/6/ does. Each Science corner paper links to the paper.</p>
   </div>
 
-  <div class="card">
+  <div class="card" id="c2">
     <h3>2. A source line and an "author has a stake" note are missing</h3>
     <p class="where">English front page and /ai-in-management/ · computer</p>
     <p><span class="lbl">What we saw:</span> the story "Joanna Stern says Siri AI still fails basics on the HomeView despite Apple's Google partnership" has no source line. The next story follows at once. The Russian front page shows the line, and so does /archive/451/: "Bloomberg Tech · author has a stake: …".</p>
@@ -80,7 +116,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
     <p class="fixed"><span class="lbl">Fixed when:</span> the English front page shows "Bloomberg Tech · author has a stake: …" under this story, as the Russian page does.</p>
   </div>
 
-  <div class="card">
+  <div class="card" id="c3">
     <h3>3. A placeholder instead of a number on the About page</h3>
     <p class="where">/about/ and /ru/about/ · computer and phone</p>
     <p><span class="lbl">What we saw:</span> in step "05 · Checking / The credibility check", the big number is the literal text "{labeled}", followed by "of 1,170 notes this week passed with a label stating their origin". Every other step shows a number.</p>
@@ -89,7 +125,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
     <p class="fixed"><span class="lbl">Fixed when:</span> the card shows a number, or the card hides its number when the value is missing. Same on /ru/about/.</p>
   </div>
 
-  <div class="card">
+  <div class="card" id="c4">
     <h3>4. Story counts are higher than the stories shown</h3>
     <p class="where">/archive/ and the group pages · computer</p>
     <p><span class="lbl">What we saw:</span> in 5 of 8 issues we opened, the archive count was higher than the stories on the issue page. "37 stories" (AI daily, 22 Nov) opens 20. "28 stories" (24 Nov) opens 20. "23 stories" opens 20. "18 stories" (India &amp; AI, 24 Nov) opens 12. "14 stories" (Ethiopia daily brief, 24 Nov) opens 12. Three other issues matched. Our guess is that issue pages stop at 20 or 12, but we did not confirm that.</p>
@@ -98,7 +134,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
     <p class="fixed"><span class="lbl">Fixed when:</span> each count equals the stories on its issue page, or the issue page lists the rest.</p>
   </div>
 
-  <div class="card">
+  <div class="card" id="c5">
     <h3>5. The Anthropic IPO figures don't agree</h3>
     <p class="where">Front page, AI in Management · computer · we are less sure about this one</p>
     <p><span class="lbl">What we saw:</span> at the same $83 share price, the lead says "the offering of 980 million shares" (that is about $81 billion). The next story says "Anthropic raises $107.3 billion in IPO at $83 per share". A third says "almost $120 billion". An earlier issue's headline calls a $1.4 trillion valuation a "$1.4 trillion IPO".</p>
@@ -114,7 +150,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 <section id="choose">
   <h2>Choosing a newsletter</h2>
 
-  <div class="card">
+  <div class="card" id="c6">
     <h3>6. "Notes on Agentic Work" has two schedules</h3>
     <p class="where">Group page, /subscribe/, front page, /ru/ · computer</p>
     <p><span class="lbl">What we saw:</span> "Notes on Agentic Work · Mon, Wed, 18:00", and on the next line "a dense letter every Tuesday and Thursday". The front page says "Mon, Wed", /ru/ says "пн, ср". The latest issue is dated Tuesday, 24 November 2026.</p>
@@ -123,7 +159,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
     <p class="fixed"><span class="lbl">Fixed when:</span> one schedule appears everywhere and matches the days issues go out.</p>
   </div>
 
-  <div class="card">
+  <div class="card" id="c7">
     <h3>7. "Dispatches from Others" is offered, but its last issue was 2 November</h3>
     <p class="where">/subscribe/ and /archive/ · computer and phone</p>
     <p><span class="lbl">What we saw:</span> /subscribe/ offers "Interesting Politics · Dispatches from Others … Sun–Fri". In the archive, its newest issue is "Dispatches from Others, 2-Nov-26", 22 days before this review. Every other daily has an issue on 24 November. /about/ counts "four desks" including Interesting Politics, but it has no page or menu entry.</p>
@@ -135,7 +171,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
     <p class="fixed"><span class="lbl">Fixed when:</span> it shows new issues again, or it is marked paused, or it leaves /subscribe/.</p>
   </div>
 
-  <div class="card">
+  <div class="card" id="c8">
     <h3>8. Some days are off the stated schedule</h3>
     <p class="where">/archive/ · computer</p>
     <p><span class="lbl">What we saw:</span> Science corner and Ethiopian banking and fintech are listed for Friday. Both have issues on Wednesday 28 October and Friday 30 October, and Science corner has none on Friday 6 November. AI daily and the Ethiopia daily brief ("Sun–Fri") go from 5 November to 8 November with no issue on Friday 6 November. The archive does not mention the gap.</p>
@@ -148,7 +184,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 <section id="past">
   <h2>Browsing past issues</h2>
 
-  <div class="card">
+  <div class="card" id="c9">
     <h3>9. An issue page doesn't say which issue it is</h3>
     <p class="where">Issue pages, e.g. /archive/264/ · computer and phone</p>
     <p><span class="lbl">What we saw:</span> on 11 of 12 issue pages, the page starts with "← The archive" and the group name. The issue's name and date ("Ethiopia daily brief, 29-Oct-26") are only in the browser tab. The only date on the page is the header, "Tuesday, 24 November 2026". There is no link to the previous or next issue.</p>
@@ -157,7 +193,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
     <p class="fixed"><span class="lbl">Fixed when:</span> each issue starts with its name and date, with previous and next links. That heading would also give these pages the main heading they lack (see the last section).</p>
   </div>
 
-  <div class="card">
+  <div class="card" id="c10">
     <h3>10. Old leads come back, and Science corner entries look the same</h3>
     <p class="where">/ethiopia/, /ai-science-corner/, /archive/ · computer</p>
     <p><span class="lbl">What we saw:</span> "Awash Bank applies for Djibouti banking licence" leads the Ethiopia daily brief on 2 November and Ethiopian banking and fintech on 13 November. "National Bank of Ethiopia issues Directive No. FS/01/2026" leads the brief on 18 November and banking on 20 November. Two more leads repeat between AI daily and Podcasts on the same day. All 8 Science corner issues show the same line: "Research papers of the week on AI and the fields around it…".</p>
@@ -169,7 +205,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
     <p class="fixed"><span class="lbl">Fixed when:</span> a repeat lead is marked ("first reported 2 Nov") or skipped, and each Science corner entry shows its top paper.</p>
   </div>
 
-  <div class="card">
+  <div class="card" id="c11">
     <h3>11. The Ethiopia AI weekly is short and repeats itself</h3>
     <p class="where">/archive/169/ and the Ethiopia AI weekly issues · computer</p>
     <p><span class="lbl">What we saw:</span> 3 of its last 4 issues have 1 to 3 stories ("1 stories" on 11 Nov). In /archive/169/, one event appears twice: "Ethiopia Seeks Partner Support for AI Institutions at Bangkok Roundtable" (Tigist Fisseha) and "Ethiopia Joins AI Roundtable at IMF and World Bank Meetings" (Tiguist Fisseha), the same person spelled two ways. A recent lead is about a blockchain AI hub (OpenGradient), not Ethiopia.</p>
@@ -182,7 +218,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 <section id="ru">
   <h2>Reading in Russian and on a phone</h2>
 
-  <div class="card">
+  <div class="card" id="c12">
     <h3>12. The Russian lists differ from the English ones</h3>
     <p class="where">/ru/agentic-software-engineering/ vs /agentic-software-engineering/ · computer</p>
     <p><span class="lbl">What we saw:</span> both pages list the same issues, but 10 of 11 show a different lead story. Issue 471 leads with "OpenAI says Codex found the root cause…" in English and "CodeRabbit launches public beta of Verify…" in Russian. 5 Russian leads are in English. Issue 344 is dated 10 November in English and 9 November in Russian.</p>
@@ -194,7 +230,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
     <p class="fixed"><span class="lbl">Fixed when:</span> each issue has the same lead and date in both languages, translated.</p>
   </div>
 
-  <div class="card">
+  <div class="card" id="c13">
     <h3>13. English words left on Russian pages</h3>
     <p class="where">/ru/archive/, /ru/, /ru/india/ · computer</p>
     <p><span class="lbl">What we saw:</span> /ru/archive/ says "N stories" in English 132 times. /ru/india/ has the heading "The publications". /ru/ has "Industry / Отчет Tracxn" where other categories are Russian ("Компании /"), and a Spanish word: "Модели visión-язык".</p>
@@ -205,7 +241,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
     <p class="fixed"><span class="lbl">Fixed when:</span> these strings are Russian, with Russian plural forms for the counts.</p>
   </div>
 
-  <div class="card">
+  <div class="card" id="c14">
     <h3>14. The Russian logo is cut off on a phone</h3>
     <p class="where">/ru/ · phone, 390 px</p>
     <p><span class="lbl">What we saw:</span> the logo is 403 px wide on a 390 px screen. The "t" and the "y" are cut. The English logo fits.</p>
@@ -213,7 +249,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
     <p class="fixed"><span class="lbl">Fixed when:</span> the logo fits inside the screen on /ru/, as on /.</p>
   </div>
 
-  <div class="card">
+  <div class="card" id="c15">
     <h3>15. Small filter buttons and broken dates on the phone archive</h3>
     <p class="where">/archive/ · phone, 390 px</p>
     <p><span class="lbl">What we saw:</span> the 10 filter buttons are 34 px tall. The filters work and the selected one is clear. Dates break in the middle: "Dispatches from Others, 2-" on one line and "Nov-26" on the next.</p>
@@ -226,14 +262,14 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
   <h2>From our earlier checks</h2>
   <p>Happy Path has looked at the public pages once a day since 23 November. These three came from those checks.</p>
 
-  <div class="card">
+  <div class="card" id="d1">
     <h3>The visitor counter stops with an error</h3>
     <p class="where">14 pages, including /, /about/ and the topic pages · computer and phone</p>
     <p><span class="lbl">What we saw:</span> the page's script stops with <code>goatcounter.count is not a function</code>. Nothing on the screen shows it, so there is no screenshot. The Privacy page says the site counts visits with GoatCounter.</p>
     <p class="fixed"><span class="lbl">Fixed when:</span> the error is gone from the browser console and visits appear in GoatCounter.</p>
   </div>
 
-  <div class="card">
+  <div class="card" id="d2">
     <h3>The Privacy page slides sideways on a phone</h3>
     <p class="where">/privacy/ · phone, 390 px</p>
     <p><span class="lbl">What we saw:</span> a long web address is wider than the screen, so the page moves left and right.</p>
@@ -241,7 +277,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
     <p class="fixed"><span class="lbl">Fixed when:</span> long addresses wrap and the page no longer scrolls sideways.</p>
   </div>
 
-  <div class="card">
+  <div class="card" id="d3">
     <h3>Four pages have no main heading</h3>
     <p class="where">/, /ru/, /archive/472/, /ru/archive/472/</p>
     <p><span class="lbl">What we saw:</span> these pages have no top-level heading. On the front page the logo picture is the only title. Screen readers and search engines use that heading to tell what a page is. It is not visible, so there is no screenshot.</p>
@@ -257,7 +293,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 </main>
 
 <footer>
-  <p>Happy Path is run by Podway.</p>
+  <p>Happy Path is run by Podway. This page has no links to it from anywhere and asks search engines not to list it. Anyone with the link can open it.</p>
 </footer>
 </body>
 </html>
