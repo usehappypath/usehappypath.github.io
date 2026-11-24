@@ -43,28 +43,35 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 :root{--hi:#dc2626;--md:#d97706;--ok:#15803d}
 @media (prefers-color-scheme:dark){:root{--hi:#f87171;--md:#fbbf24;--ok:#4ade80}}
 
+:root[data-theme="light"]{--bg:#fbfaf7;--fg:#1d1d1b;--muted:#6b6a65;--line:#e6e3dc;--card:#fff;--accent:#1f8a5b;--accent-fg:#fff;--code:#f1efe9;--hi:#dc2626;--md:#d97706;--ok:#15803d}
+:root[data-theme="dark"]{--bg:#141413;--fg:#ecebe6;--muted:#a3a19a;--line:#2d2c29;--card:#1c1c1a;--accent:#3cc48a;--accent-fg:#0d1f16;--code:#25241f;--hi:#f87171;--md:#fbbf24;--ok:#4ade80}
+.top{justify-content:space-between}
+.theme{min-height:44px;min-width:44px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:999px;padding:0 14px;font:500 14px system-ui;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.how{font-size:14px;color:var(--muted);margin:14px 2px 0}
+.tap{font-size:13px;color:var(--muted);margin:0 0 14px}
 </style>
+<script>try{var t=localStorage.getItem("hp-theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
 </head>
 <body>
 <header class="top">
   <span class="brand"><span class="dot"></span>Happy Path · site review</span>
+  <button class="theme" type="button" id="theme" aria-label="Switch light or dark theme"><span id="theme-l">Dark</span></button>
 </header>
 
 <main class="post">
 <section class="hero">
-  <p class="kicker">For the team behind The Observatory</p>
   <h1>The Observatory: a reader's review</h1>
-  <p class="meta">observatory.mgorsky.net · 24 November 2026</p>
-  <p class="lead">Happy Path, the site-testing tool from Podway, read your site the way a careful reader would. We only browsed. We didn't change anything or send any forms.</p>
+  <p class="meta">observatory.mgorsky.net · 24 November 2026 · by Happy Path (Podway)</p>
+  <p class="lead">We read your site as a careful reader would. We only browsed and changed nothing.</p>
 </section>
 
 
 <section>
   <div class="sum">
   <h2>Where a reader gets stuck</h2>
-  <p class="sub">We followed a reader through the site: 15 problems, 3 more from our earlier checks, and 1 clear win. Tap a label to see the details.</p>
+  <p class="tap">Tap a label for details.</p>
   <div class="journey">
-    <div class="step"><span class="pin ok">✓</span><div class="st">Read a story</div><div class="sd">9 of 9 summaries match their sources.</div></div>
+    <div class="step"><span class="pin ok">✓</span><div class="st">Read a story</div><div class="sd">We checked 9 stories against their sources. All 9 match, and all 9 links work.</div></div>
     <div class="step"><span class="pin hi">5</span><div class="st">Check where it came from</div><div class="chips"><a class="chip hi" href="#c1">No source links</a><a class="chip md" href="#c3">“{labeled}” on About</a><a class="chip md" href="#c4">Counts too high</a><a class="chip md" href="#c5">IPO figures clash</a><a class="chip " href="#c2">Stake note missing</a></div></div>
     <div class="step"><span class="pin">3</span><div class="st">Pick a newsletter</div><div class="chips"><a class="chip md" href="#c6">Two schedules</a><a class="chip md" href="#c7">No issue since 2 Nov</a><a class="chip " href="#c8">Missed days</a></div></div>
     <div class="step"><span class="pin">3</span><div class="st">Look at past issues</div><div class="chips"><a class="chip md" href="#c11">Ethiopia weekly repeats</a><a class="chip " href="#c9">No date on issue</a><a class="chip " href="#c10">Old leads return</a></div></div>
@@ -74,22 +81,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
   <div class="legend"><span><i class="lhi"></i>hurts trust</span><span><i class="lmd"></i>confuses readers</span><span><i></i>small</span></div>
   <p class="first"><b>Fix these 3 first:</b> <a href="#c1">source links on issue pages</a>, <a href="#c3">the “{labeled}” placeholder</a>, <a href="#c4">the story counts</a>.</p>
   </div>
-</section>
-<section>
-  <h2>What we checked</h2>
-  <p>On 24 November 2026 we loaded 71 pages over 12 minutes, on a computer (1280 px wide) and a phone (390 px), in English and in Russian. We did not test sign-up, email delivery, Telegram, dark mode or keyboard focus.</p>
-  <div class="good">
-    <p><b>What works:</b> we picked 9 stories and opened the article each one is based on. All 9 summaries matched their source on numbers, names and dates. All 9 source links worked and were on topic.</p>
-  </div>
-  <p>Below are 15 things a reader may trip over. Each one showed up in 2 of 2 checks in a fresh browser. They are grouped by what the reader is trying to do. Each card says what "fixed" looks like, so you can check it.</p>
-  <ul class="toc">
-    <li><a href="#story">Checking a story</a> (1–5)</li>
-    <li><a href="#choose">Choosing a newsletter</a> (6–8)</li>
-    <li><a href="#past">Browsing past issues</a> (9–11)</li>
-    <li><a href="#ru">Reading in Russian and on a phone</a> (12–15)</li>
-    <li><a href="#daily">From our earlier checks</a> (3 more)</li>
-  </ul>
-  <p class="note">The round "Made with Podway" badge in some screenshots is ours. It is not part of any finding.</p>
+<p class="how">How we tested: 71 pages, computer and phone, English and Russian. Each problem showed up twice in a fresh browser. Not tested: sign-up, email, Telegram, keyboard use. The round "Made with Podway" badge in screenshots is ours.</p>
 </section>
 
 <section id="story">
@@ -295,5 +287,11 @@ figcaption{font-size:13px;color:var(--muted);margin-top:5px}
 <footer>
   <p>Happy Path is run by Podway. This page has no links to it from anywhere and asks search engines not to list it. Anyone with the link can open it.</p>
 </footer>
+<script>
+(function(){var b=document.getElementById("theme"),l=document.getElementById("theme-l"),r=document.documentElement;
+function cur(){return r.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}
+function lab(){l.textContent=cur()==="dark"?"Light":"Dark"}
+b.addEventListener("click",function(){var n=cur()==="dark"?"light":"dark";r.dataset.theme=n;try{localStorage.setItem("hp-theme",n)}catch(e){}lab()});lab();})();
+</script>
 </body>
 </html>
