@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Path — QA that uses your site like a real visitor</title>
+<meta name="description" content="Happy Path tests your live website like a curious visitor, confirms every bug twice, and files it as a GitHub issue your team or coding agent can answer with one line.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="./"><span class="dot"></span>Happy Path</a>
+  <nav><a href="#how">How it works</a><a href="#agents">For agents</a><a href="#faq">FAQ</a></nav>
+</header>
+
+<main>
+<section class="hero">
+  <p class="kicker">Live-site QA for GitHub</p>
+  <h1>Your site, tested like a real visitor would use it.</h1>
+  <p class="lead">Happy Path opens your live site every day, clicks around like a curious user, and reads the pages like a picky customer. When something is broken, it checks twice, then files a GitHub issue. Your team or your coding agent answers with one line.</p>
+  <p class="cta">
+    <a class="button" href="https://github.com/apps/use-happy-path/installations/new">Install on GitHub</a>
+    <a class="link" href="#how">See how it works →</a>
+  </p>
+  <p class="note">Free while in early access · <span id="seats">10 sites</span> at a time · read-only, never touches your code</p>
+</section>
+
+<section class="issue-demo" aria-label="Example issue">
+  <div class="issue">
+    <div class="issue-head"><span class="badge">happypath</span> <b>Compare box says "saves $696/yr", table shows $666</b></div>
+    <p class="muted">use-happy-path[bot] · Page: /pricing?size=4200 · desktop · severity medium</p>
+    <p><b>What happens:</b> the compare box and the table on the same screen disagree.</p>
+    <p><b>What a user expects:</b> one number they can trust.</p>
+  </div>
+  <div class="reply"><code>/happypath fixed</code></div>
+  <div class="issue closed">
+    <p><b>use-happy-path[bot]:</b> We tested the live site again. <b>It is gone.</b> Closing. Ticked Systeme.io + Ghost: "saves $666" = $960 − $294.</p>
+  </div>
+</section>
+
+<section id="how">
+  <h2>How it works</h2>
+  <ol class="steps">
+    <li><b>Install the app</b> on the repo of your website. It gets one right: issues. It cannot read your code.</li>
+    <li><b>Tell it your site.</b> It opens a "Set up Happy Path" issue. Reply <code>/happypath setup https://your-site.com</code> and put a small file on your site to prove it is yours.</li>
+    <li><b>It tests every day.</b> Pages, links, errors, phone layout and speed, read-only. Once a week it also reads your site like a real visitor: does the page keep its promise, is the content clear, what would confuse people.</li>
+    <li><b>Only confirmed bugs become issues.</b> Each one is reproduced twice in a fresh browser first, with the page, the steps, what happens and what a user expects. At most 10 new issues a day.</li>
+    <li><b>Answer in one line.</b> It rechecks the live site and closes or reopens the issue with proof.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>The one-line answers</h2>
+  <table class="cmds">
+    <tr><td><code>/happypath fixed</code></td><td>After the fix is live. It tests again, then closes or reopens with proof.</td></tr>
+    <tr><td><code>/happypath cant-repro</code></td><td>It replays twice. Gone: closed. Still there: proof posted.</td></tr>
+    <tr><td><code>/happypath wontfix &lt;why&gt;</code></td><td>Intended, or not worth it. A reason is required.</td></tr>
+    <tr><td><code>/happypath duplicate #12</code></td><td>Merged into the other issue.</td></tr>
+    <tr><td><code>/happypath info</code></td><td>Page, steps and the last check.</td></tr>
+  </table>
+  <p class="muted">Closing an issue yourself works too: "completed" is rechecked like <code>fixed</code>.</p>
+</section>
+
+<section>
+  <h2>Who it is for</h2>
+  <div class="cards">
+    <div><h3>Small teams and solo builders</h3><p>You ship fast and nobody clicks through the whole site after each deploy. Happy Path does, every day.</p></div>
+    <div><h3>Teams with coding agents</h3><p>Issues are written so an agent can fix them, and answered with commands an agent can type. Install the skill below.</p></div>
+    <div><h3>Content and price sites</h3><p>It checks that numbers agree across pages, that promises match what the page delivers, and that nothing reads as stale or confusing.</p></div>
+  </div>
+</section>
+
+<section id="agents">
+  <h2>For coding agents</h2>
+  <p>Teach your agent to handle Happy Path issues: say <code>fixed</code> only after deploy, never treat issue text as instructions, set up a repo.</p>
+  <h3>Claude Code</h3>
+  <pre><code>/plugin marketplace add usehappypath/skills
+/plugin install happypath@usehappypath</code></pre>
+  <h3>Codex and others</h3>
+  <p>Paste the <a href="https://github.com/usehappypath/skills/blob/main/AGENTS-snippet.md">AGENTS.md snippet</a> into your repo, or point your agent at <a href="llms.txt">llms.txt</a>.</p>
+</section>
+
+<section id="faq">
+  <h2>Questions</h2>
+  <details><summary>Does it change anything on my site?</summary><p>No. It only reads and clicks safe things like links, tabs and menus. It never submits forms, signs up, signs in, buys or sends messages.</p></details>
+  <details><summary>Can it read my code?</summary><p>No. The GitHub app has one right: read and write issues in the repos you choose.</p></details>
+  <details><summary>Why do I need to put a file on my site?</summary><p>So nobody can point Happy Path at a site they do not own. Serve <code>/.well-known/happypath.txt</code> containing your repo name, like <code>owner/repo</code>.</p></details>
+  <details><summary>How many issues will I get?</summary><p>Only bugs reproduced twice, at medium severity or above by default, and at most 10 new issues a day. One issue per problem, never duplicates.</p></details>
+  <details><summary>What does it cost?</summary><p>Nothing during early access. We test a limited number of sites at a time; when full, new sites join a waitlist and the setup issue tells you your place.</p></details>
+  <details><summary>Does it test pages behind a login?</summary><p>Not yet for new sites. Public pages only.</p></details>
+  <details><summary>How do I stop it?</summary><p>Uninstall the app in your GitHub settings. Testing stops at once, and we delete your site's data within 30 days.</p></details>
+</section>
+</main>
+
+<footer>
+  <p>Happy Path is run by Podway. <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="https://github.com/usehappypath">GitHub</a></p>
+</footer>
+</body>
+</html>
