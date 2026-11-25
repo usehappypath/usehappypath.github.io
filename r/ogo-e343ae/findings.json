@@ -1,0 +1,1291 @@
+{
+ "site": "https://www.ogo.co.il",
+ "reviewed": "2026-11-24/25",
+ "tool": "Happy Path",
+ "mode": "read-only",
+ "note": "'check.assert_bug_present' passes while the bug is still there; after a fix it should fail. 'viewport' is desktop (1280x900), mobile (390x844) or an explicit WxH. Findings without a check need a manual re-test.",
+ "findings": [
+  {
+   "id": "OBS-01",
+   "title": "Search results do not say what you searched for, and an emoji search shows everything",
+   "priority": "should fix",
+   "pages": [
+    "https://www.ogo.co.il/ru/filtered?q=%D1%85%D0%B0%D0%BD%D1%83%D0%BA%D0%B0",
+    "https://www.ogo.co.il/ru/filtered?q=%F0%9F%8E%B5%F0%9F%8E%89"
+   ],
+   "fixed_when": "The results page names the query and the number of results (\"Результаты по «ханука»: N событий\") with a way to clear it, and a query that matches nothing shows the \"ничего не нашлось\" message.",
+   "viewport": "desktop and mobile",
+   "observed": "After a search for \"ханука\" (Hanukkah) the list heading reads \"Все события в Израиле\" (all events in Israel), as on the home page, and the page heading is the site name, \"OGO! — афиша событий в Израиле\". The query appears only inside the search box, and there is no result count. A search for an emoji (\"🎵🎉\") shows the full event list with no \"nothing found\" message. A text search with no match does say \"По запросу «…» ничего не нашлось\".",
+   "expected": "The results page names the query and the number of results (\"Результаты по «ханука»: N событий\") with a way to clear it, and a query that matches nothing shows the \"ничего не нашлось\" message.",
+   "why": "A visitor cannot tell a list of results from the normal listing, so an empty search looks like a long list of matches.",
+   "steps": [
+    "Type \"ханука\" in the \"Найдите своё событие\" box on /ru and press Enter.",
+    "Read the heading above the results.",
+    "Repeat with \"🎵🎉\"."
+   ],
+   "suggested_fix": "Add the query as a removable chip in the heading line, with a result count. If the normalised query is empty but the raw q is not, render the no-results state with the raw query quoted.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/filtered?q=%F0%9F%8E%B5%F0%9F%8E%89",
+    "viewport": "desktop",
+    "wait_ms": 15000,
+    "assert_bug_present": [
+     {
+      "js_true": "!document.body.innerText.includes('ничего не нашлось') && document.querySelectorAll('a[href*=\"/event/\"]').length>10"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-02",
+   "title": "The Lumagica light festival is filed under Theatre and search cannot find it",
+   "priority": "should fix",
+   "pages": [
+    "https://www.ogo.co.il/ru/event/il/tel-aviv/2026/11/25/light-festival-lumagica-sg3haMfwLL4yDeJsz22a12",
+    "https://www.ogo.co.il/ru/festivals",
+    "https://www.ogo.co.il/ru"
+   ],
+   "fixed_when": "The festival is under Festivals, typing \"Люмагика\" suggests it, and the canonical address does not carry a past date.",
+   "viewport": "desktop",
+   "observed": "The breadcrumb says \"Тель-Авив › Спектакли\" (theatre). The event is on /ru/theater and not on /ru/festivals. Typing \"Люмагика\" in the search box shows no suggestions at all, while \"Миядзаки\" shows the matching concert at once. The page also declares a canonical address dated 12 November (/2026/11/12/…), while it shows \"25 ноября\".",
+   "expected": "The festival is under Festivals, typing \"Люмагика\" suggests it, and the canonical address does not carry a past date.",
+   "why": "This is the event the home page promotes as \"Смотрят сейчас\" (being viewed now), and a visitor who searches for it by name finds nothing.",
+   "steps": [
+    "On /ru type \"Люмагика\" in \"Найдите своё событие\" (no Enter).",
+    "Compare with \"Миядзаки\".",
+    "Open /ru/event/il/tel-aviv/2026/11/25/light-festival-lumagica-sg3haMfwLL4yDeJsz22a12 and read the breadcrumb and link[rel=canonical]."
+   ],
+   "suggested_fix": "Map the festival tag to the Festivals category; include multi-day and ongoing events in the search index; use a canonical URL without a date or with the next occurrence.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/event/il/tel-aviv/2026/11/25/light-festival-lumagica-sg3haMfwLL4yDeJsz22a12",
+    "viewport": "desktop",
+    "wait_ms": 2500,
+    "assert_bug_present": [
+     {
+      "js_true": "document.querySelector('link[rel=canonical]').href.includes('/2026/11/12/')"
+     },
+     {
+      "text_present": "Спектакли"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-03",
+   "title": "Filters show events that do not match them",
+   "priority": "should fix",
+   "pages": [
+    "https://www.ogo.co.il/ru/concerts/filtered?tod=day",
+    "https://www.ogo.co.il/en/concerts/filtered?tod=day",
+    "https://www.ogo.co.il/en/kids/filtered?age=teens"
+   ],
+   "fixed_when": "Under the daytime filter each card shows a session before 17:00, or the event is left out. The teens list has no events for toddlers.",
+   "viewport": "desktop",
+   "observed": "Under the daytime filter \"днем, до 17:00\" (daytime, before 17:00) the first card says \"25 ноября в 18:00\", and the next one \"26 ноября в 19:00\". The English list shows \"6:00 PM\" and \"7:00 PM\". The kids filter \"Teens 13–17\" lists \"Guli and the Singing Guitar for Crawling Age to Two Years Old\" and \"The Maccabees … Ages 2–12\".",
+   "expected": "Under the daytime filter each card shows a session before 17:00, or the event is left out. The teens list has no events for toddlers.",
+   "why": "A parent who picks \"teens\" or \"daytime\" has to check every card again by hand.",
+   "steps": [
+    "Open /ru/concerts and choose \"Днем\".",
+    "Read the times on the first cards.",
+    "Open /en/kids and choose \"Teens 13–17\"."
+   ],
+   "suggested_fix": "When a filter matches a multi-session event on one session, show that session on the card. Match age filters on the event age range, not on a broad \"kids\" tag.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/concerts/filtered?tod=day",
+    "viewport": "desktop",
+    "wait_ms": 3000,
+    "assert_bug_present": [
+     {
+      "js_true": "/\\d+ [а-я]+ в (1[7-9]|2\\d):\\d\\d/.test(document.body.innerText)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-04",
+   "title": "Back skips the list after date chips and page numbers",
+   "priority": "should fix",
+   "pages": [
+    "https://www.ogo.co.il/ru/concerts",
+    "https://www.ogo.co.il/ru/concerts/filtered?page=2"
+   ],
+   "fixed_when": "After \"Сегодня\" or page 2, Back returns to the list as it was.",
+   "viewport": "desktop and mobile",
+   "observed": "On /ru/concerts, tapping \"Сегодня\" (today) changes the address to …/filtered?start=…&end=… but does not add a history step. Back then goes to the page before the list, or out of the site if the list was the first page opened. \"Выходные\" (weekend) and \"Страница 2\" (page 2) do the same. The \"Ещё\" panel, the city picker and the language chips do add a step, and Back works there.",
+   "expected": "After \"Сегодня\" or page 2, Back returns to the list as it was.",
+   "why": "A visitor who came from a search result and presses Back after one tap leaves the site.",
+   "steps": [
+    "Open /ru/concerts from another page.",
+    "Tap \"Сегодня\" (or \"Выходные\", or page 2).",
+    "Press Back."
+   ],
+   "suggested_fix": "Use router.push instead of router.replace for the date chips and the pagination.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/concerts",
+    "viewport": "desktop",
+    "wait_ms": 5000,
+    "assert_bug_present": [
+     {
+      "js_true": "(async()=>{const n=history.length;[...document.querySelectorAll('button')].find(b=>b.innerText.trim()==='Сегодня').click();await new Promise(r=>setTimeout(r,6000));return history.length===n && location.href.includes('start=')})()"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-05",
+   "title": "A weekly meeting appears as five separate cards",
+   "priority": "should fix",
+   "pages": [
+    "https://www.ogo.co.il/ru/city/haifa/free",
+    "https://www.ogo.co.il/ru/city/haifa/lectures",
+    "https://www.ogo.co.il/ru/city/bnei-brak",
+    "https://www.ogo.co.il/ru/city/jerusalem/free"
+   ],
+   "fixed_when": "Each series shows as one card with \"Ещё N дат\", as other series already do.",
+   "viewport": "desktop",
+   "observed": "\"Встреча «Шлувот»\" (a meeting) appears 5 times on /ru/city/haifa/free (29 Nov, 6, 13, 20 and 27 Dec). \"Парламент Рамат-Эшколь\" appears 4 times on the Haifa lectures page, and \"Тайная жизнь Бней-Брака\" 4 times on the Bnei Brak page, with four different end dates. Other series on the site are grouped into one card with \"Ещё N дат\" (N more dates).",
+   "expected": "Each series shows as one card with \"Ещё N дат\", as other series already do.",
+   "why": "Repeats push other events off the first screen and make a short list look longer.",
+   "steps": [
+    "Open /ru/city/haifa/free.",
+    "Count the \"Встреча «Шлувот»\" cards."
+   ],
+   "suggested_fix": "Apply the existing series grouping to occurrences that share title, venue and time but have different ids.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/city/haifa/free",
+    "viewport": "desktop",
+    "wait_ms": 2500,
+    "assert_bug_present": [
+     {
+      "js_true": "(document.body.innerText.match(/Встреча «Шлувот»/g)||[]).length >= 3"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-06",
+   "title": "Items in lists they do not belong to: a meeting in Online, a season ticket in Free",
+   "priority": "should fix",
+   "pages": [
+    "https://www.ogo.co.il/ru/online",
+    "https://www.ogo.co.il/ru/city/haifa/free",
+    "https://www.ogo.co.il/en/places?free=1"
+   ],
+   "fixed_when": "Online lists only remote events, Free lists only free-entry items (donation items labelled or kept apart), and a free place shows \"Free\" on its card.",
+   "viewport": "desktop",
+   "observed": "\"Онлайн-события\" (online events) lists \"Скоростные гей-свидания в Иерусалиме…\" (speed dating in Jerusalem), tagged both \"встреча\" (meeting) and \"онлайн\". \"Бесплатные события в Хайфе\" (free events) lists \"Хапоэль Хайфа — абонементы с благотворительным взносом\" (season tickets with a donation), tagged \"за донат\". 6 donation items appear on free pages. In free places, the Eilat Camel Ranch card says \"from ₪100\"; its page says entry is free and only extras are paid.",
+   "expected": "Online lists only remote events, Free lists only free-entry items (donation items labelled or kept apart), and a free place shows \"Free\" on its card.",
+   "why": "A visitor who picks \"online\" or \"free\" gets things they would have to travel to or pay for.",
+   "steps": [
+    "Open /ru/online and find \"Скоростные гей-свидания\".",
+    "Open /ru/city/haifa/free and find \"абонементы\"."
+   ],
+   "suggested_fix": "Drop the online tag when an event has a venue and no stream link; keep \"за донат\" and ticket products off /free or add a filter for them; show \"Free\" on free places.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/online",
+    "viewport": "desktop",
+    "wait_ms": 2500,
+    "assert_bug_present": [
+     {
+      "text_present": "Скоростные гей-свидания в Иерусалиме"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-07",
+   "title": "The filter panel offers choices that give no results, and its badge undercounts",
+   "priority": "minor",
+   "pages": [
+    "https://www.ogo.co.il/ru/concerts",
+    "https://www.ogo.co.il/ru/city/haifa/concerts/filtered?cost_types=free"
+   ],
+   "fixed_when": "Choices that would give 0 results are marked or disabled, selected chips look the same in every group, and the badge counts every active filter.",
+   "viewport": "desktop",
+   "observed": "In the \"Ещё\" (more) panel, choosing \"Хайфа\" gives \"Показать 306 событий\"; adding \"бесплатно\" (free) gives \"Показать 0 событий\" and the button still works, leading to \"События не найдены\". The selected price chip gets a ✓, the selected city only a ring. After applying both, the badge reads \"Ещё · 1\".",
+   "expected": "Choices that would give 0 results are marked or disabled, selected chips look the same in every group, and the badge counts every active filter.",
+   "why": "A visitor walks into an empty page without warning and cannot tell how many filters are on.",
+   "steps": [
+    "Open /ru/concerts and click \"Ещё\".",
+    "Choose \"Хайфа\", then \"бесплатно\".",
+    "Read the button, then press it."
+   ],
+   "suggested_fix": "Compute facet counts for the current selection; use one selected style; count only recognised filter values in the badge.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/city/haifa/concerts/filtered?cost_types=free",
+    "viewport": "desktop",
+    "wait_ms": 8000,
+    "assert_bug_present": [
+     {
+      "text_present": "События не найдены"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-08",
+   "title": "The city picker finds only Russian spellings",
+   "priority": "minor",
+   "pages": [
+    "https://www.ogo.co.il/ru/concerts"
+   ],
+   "fixed_when": "\"Haifa\" and \"חיפה\" both find Хайфа in the picker.",
+   "viewport": "desktop",
+   "observed": "Typing \"хай\" finds \"Хайфа\". Typing \"Haifa\" or \"חיפה\" shows \"Такого города нет в списке\" (no such city in the list). The main search box does find Latin and Hebrew text.",
+   "expected": "\"Haifa\" and \"חיפה\" both find Хайфа in the picker.",
+   "why": "Many visitors type a city in English or Hebrew, and the picker tells them the city does not exist.",
+   "steps": [
+    "Open /ru/concerts.",
+    "Click \"Израиле\" to choose a city.",
+    "Type \"Haifa\", then \"חיפה\"."
+   ],
+   "suggested_fix": "Index the Russian, Hebrew and English names and the slug of each city in the picker filter.",
+   "check": null
+  },
+  {
+   "id": "OBS-09",
+   "title": "Some filters are lost on Back or reload",
+   "priority": "minor",
+   "pages": [
+    "https://www.ogo.co.il/ru/calendar",
+    "https://www.ogo.co.il/en/festivals"
+   ],
+   "fixed_when": "The chosen tab or period is in the address (for example ?type=school), so Back, reload and shared links keep it.",
+   "viewport": "desktop and mobile",
+   "observed": "On the calendar, clicking \"Каникулы\" (school breaks) shows 7 items but the address stays /ru/calendar. After a reload all 11 items show again with \"Все\" selected. On /en/festivals, choosing \"Next month\", opening a festival and pressing Back returns to \"All\".",
+   "expected": "The chosen tab or period is in the address (for example ?type=school), so Back, reload and shared links keep it.",
+   "why": "A visitor who opens one item and comes back has to set the filter again, and cannot share a filtered link.",
+   "steps": [
+    "Open /ru/calendar, click \"Каникулы\", reload.",
+    "Open /en/festivals, choose \"Next month\", open a festival, press Back."
+   ],
+   "suggested_fix": "Store the tab and period in a query parameter and read it on load.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/calendar",
+    "viewport": "desktop",
+    "wait_ms": 5000,
+    "assert_bug_present": [
+     {
+      "js_true": "(async()=>{[...document.querySelectorAll('button')].find(b=>b.innerText.includes('Каникулы')).click();await new Promise(r=>setTimeout(r,1500));return location.href==='https://www.ogo.co.il/ru/calendar'})()"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-10",
+   "title": "Pages linked from the home page with only one or two events",
+   "priority": "minor",
+   "pages": [
+    "https://www.ogo.co.il/ru/city/ashkelon/food",
+    "https://www.ogo.co.il/ru/city/ashkelon/lectures",
+    "https://www.ogo.co.il/ru/city/ashkelon/free",
+    "https://www.ogo.co.il/ru/city/latrun/kids"
+   ],
+   "fixed_when": "A city or category page is linked from the home page only when it has at least 3 upcoming items.",
+   "viewport": "desktop",
+   "observed": "Of the 44 city and category pages linked from the Russian home page, 4 have 2 items or fewer. \"Еда в Ашкелоне\" (food in Ashkelon) has 1 item, a crafts fair (\"Ярмарка ручной работы\"). \"Лекции в Ашкелоне\" has 1, \"Бесплатные события в Ашкелоне\" 2, \"Детские события в Латруне\" 2. The other 40 have 11 to 60.",
+   "expected": "A city or category page is linked from the home page only when it has at least 3 upcoming items.",
+   "why": "A visitor follows a promoted link and lands on an almost empty page.",
+   "steps": [
+    "Open /ru.",
+    "Click the Ashkelon \"Еда\" link."
+   ],
+   "suggested_fix": "Link a city/category page only when it has 3 or more upcoming items; otherwise link the city page or the national category.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/city/ashkelon/food",
+    "viewport": "desktop",
+    "wait_ms": 2500,
+    "assert_bug_present": [
+     {
+      "js_true": "new Set([...document.querySelectorAll('a[href*=\"/event/\"]')].map(a=>a.getAttribute('href'))).size <= 2"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-11",
+   "title": "20 events have no category, so no category page lists them",
+   "priority": "minor",
+   "pages": [
+    "https://www.ogo.co.il/ru/city/merkaz-meirav",
+    "https://www.ogo.co.il/ru/city/yifat",
+    "https://www.ogo.co.il/ru/city/bnei-brak"
+   ],
+   "fixed_when": "Every event card shows at least one category.",
+   "viewport": "desktop",
+   "observed": "20 of 2,229 cards show only a price and a language, no category. Examples: \"Спектакль «Зарезервированные места»\" (a play), \"Альта Виа 1\", \"«Бней-Браки́т»: аутентичная гастрономическая экскурсия\" (a food tour), \"Души\".",
+   "expected": "Every event card shows at least one category.",
+   "why": "A visitor browsing Theatre or Tours never sees these events.",
+   "steps": [
+    "Open /ru/city/merkaz-meirav and scroll to June 2027."
+   ],
+   "suggested_fix": "Require one category at import, inferred from the title (\"Спектакль\" → спектакль, \"экскурсия\" → экскурсия).",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/city/yifat",
+    "viewport": "desktop",
+    "wait_ms": 2500,
+    "assert_bug_present": [
+     {
+      "js_true": "document.body.innerText.includes('Альта Виа 1\\nЙифат\\nплатно')"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-12",
+   "title": "A places search says \"1\" and \"Nothing for this choice\" at the same time",
+   "priority": "minor",
+   "pages": [
+    "https://www.ogo.co.il/en/places?type=beach&q=Atlit"
+   ],
+   "fixed_when": "The counts and the list agree: either the one place is shown, or the counts say 0.",
+   "viewport": "desktop",
+   "observed": "The filters read \"All · 1\" and \"Museums & heritage · 1\", and the list below says \"Nothing for this choice.\"",
+   "expected": "The counts and the list agree: either the one place is shown, or the counts say 0.",
+   "why": "The visitor sees there is a match but cannot reach it.",
+   "steps": [
+    "Open /en/places?type=beach&q=Atlit.",
+    "Compare the filter counts with the list."
+   ],
+   "suggested_fix": "Compute the counts with the same type filter as the list, or show the match when the selected type has none.",
+   "check": {
+    "url": "https://www.ogo.co.il/en/places?type=beach&q=Atlit",
+    "viewport": "desktop",
+    "wait_ms": 3500,
+    "assert_bug_present": [
+     {
+      "text_present": "All · 1"
+     },
+     {
+      "text_present": "Nothing for this choice"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-13",
+   "title": "A tour card says \"43 more dates until 19 Nov\"; the tour page says 40 dates until May 2027",
+   "priority": "fix first",
+   "pages": [
+    "https://www.ogo.co.il/ru",
+    "https://www.ogo.co.il/he",
+    "https://www.ogo.co.il/ru/event/il/ashdod/2026/11/27/gior-singer-9UCX1A4foNb7ppRHAohqC6"
+   ],
+   "fixed_when": "The card shows the same count and end date as the tour page, with the year when the end date is in another year (\"Ещё 39 дат до 29 мая 2027\").",
+   "viewport": "desktop and mobile",
+   "observed": "The home card for \"Стендап Гиоры Зингера\" (Friday 27 Nov) says \"Ещё 43 даты до 19 нояб.\" (43 more dates until 19 Nov) and \"…и ещё 30 городов\" (30 more cities). The event page says \"Гастроли: 40 дат в 32 городах, до 29 мая 2027 г.\" (40 dates in 32 cities, until 29 May 2027). The Hebrew home card says the same as the Russian one. We checked 7 other tour cards and they match their pages.",
+   "expected": "The card shows the same count and end date as the tour page, with the year when the end date is in another year (\"Ещё 39 дат до 29 мая 2027\").",
+   "why": "\"until 19 Nov\" on a 27 Nov card reads as a tour that is already over, so a visitor may not look for a later date.",
+   "steps": [
+    "Open /ru and find the Gior Singer card under Friday 27 November.",
+    "Open it and compare with \"Гастроли: …\"."
+   ],
+   "suggested_fix": "Build the card's 'N more dates / until X / +K cities' from the same deduplicated, future-only date list the event page uses; print the year when it differs.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru",
+    "viewport": "desktop",
+    "wait_ms": 2500,
+    "assert_bug_present": [
+     {
+      "text_present": "Ещё 43 даты до 19 нояб."
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-14",
+   "title": "The Jerusalem Hanukkah page says to light the first candle after sunset on a Friday",
+   "priority": "fix first",
+   "pages": [
+    "https://www.ogo.co.il/en/holidays/hanukkah/jerusalem"
+   ],
+   "fixed_when": "For Friday 4 December the page gives a time before Shabbat candle lighting, or says \"before Shabbat candles\".",
+   "viewport": "desktop",
+   "observed": "\"First candle, December 4 | 4:34 PM | after sunset\". 4 December 2026 is a Friday. On Friday the Hanukkah candles are lit before the Shabbat candles, so before sunset; in Jerusalem Shabbat candles are lit about 40 minutes before sunset.",
+   "expected": "For Friday 4 December the page gives a time before Shabbat candle lighting, or says \"before Shabbat candles\".",
+   "why": "An observant visitor who follows the page would light too late on the first night.",
+   "steps": [
+    "Open /en/holidays/hanukkah/jerusalem.",
+    "Read the first-candle line."
+   ],
+   "suggested_fix": "When the first night falls on a Friday, show the time before Shabbat candle lighting.",
+   "check": {
+    "url": "https://www.ogo.co.il/en/holidays/hanukkah/jerusalem",
+    "viewport": "desktop",
+    "wait_ms": 3000,
+    "assert_bug_present": [
+     {
+      "text_present": "First candle, December 4"
+     },
+     {
+      "text_present": "after sunset"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-15",
+   "title": "Self-guided phone tours appear on Today with made-up start times",
+   "priority": "fix first",
+   "pages": [
+    "https://www.ogo.co.il/ru/today",
+    "https://www.ogo.co.il/ru/city/jerusalem/free",
+    "https://www.ogo.co.il/ru/city/tel-aviv"
+   ],
+   "fixed_when": "Self-guided tours appear only under \"В любой день\" (any day) and show no clock time.",
+   "viewport": "desktop",
+   "observed": "\"25 ноября в 08:00 · Идеальное свидание: самостоятельная ночная экскурсия по Иерусалиму с мобильным телефоном\" (a self-guided night tour, at 08:00). Others show \"ежедневно в 08:00\", \"в 16:00\", \"в 11:45\" (daily at a fixed time). These tours can be done at any time and belong on /ru/anyday (\"Дату выбираете сами\", you choose the date).",
+   "expected": "Self-guided tours appear only under \"В любой день\" (any day) and show no clock time.",
+   "why": "A visitor reads a fixed start time that does not exist, and a night tour at 8 in the morning.",
+   "steps": [
+    "Open /ru/today and look for \"ночная экскурсия\"."
+   ],
+   "suggested_fix": "Classify app-based self-guided tours as anyday at import and keep them off day lists.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/today",
+    "viewport": "desktop",
+    "wait_ms": 2500,
+    "assert_bug_present": [
+     {
+      "text_present": "самостоятельная ночная экскурсия"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-16",
+   "title": "The same show is listed twice, and the copies disagree on price, time or box office",
+   "priority": "fix first",
+   "pages": [
+    "https://www.ogo.co.il/ru/exhibitions",
+    "https://www.ogo.co.il/en/event/il/haifa/2026/06/28/exhibition-in-praise-shadows-or-silence-light-1q5cbcDimJtqvx1XyJdb6j",
+    "https://www.ogo.co.il/en/event/il/haifa/2026/06/27/in-praise-shadows-or-silence-time-light-3wXPeEvH1XkfAKtJ19JtJN",
+    "https://www.ogo.co.il/ru/city/beer-sheva/concerts",
+    "https://www.ogo.co.il/en/city/haifa/weekend"
+   ],
+   "fixed_when": "One card per show, with one price, one time and one ticket seller.",
+   "viewport": "desktop",
+   "observed": "The In Praise of Shadows exhibition in Haifa is listed twice, both \"До 28 ноября\": \"Выставка «Восхваление теней | Тишина света»\" tagged \"бесплатно\" (free) and \"Во славу теней | Безмолвие времени света\" tagged \"платно\" (paid). In English one page has \"Register\", the other \"Buy Tickets\". The Streisand tribute in Beer-Sheva on 28 Nov is listed twice: one page names the Kivunim box office, the other a Tel Aviv hall and phone number. Nino Katamadze in Haifa on 27 Nov is listed at 8:00 PM and at 8:30 PM. 6 such pairs in all.",
+   "expected": "One card per show, with one price, one time and one ticket seller.",
+   "why": "A visitor does not know whether to pay, when to arrive, or whom to call.",
+   "steps": [
+    "Open /ru/exhibitions and find both In Praise of Shadows cards under \"До 28 ноября\".",
+    "Open /en/city/haifa/weekend and find both Nino Katamadze cards."
+   ],
+   "suggested_fix": "Deduplicate at import by city, venue, start time and normalised title (or translation of the source title); keep the primary ticket seller.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/exhibitions",
+    "viewport": "desktop",
+    "wait_ms": 2500,
+    "assert_bug_present": [
+     {
+      "text_present": "Восхваление теней"
+     },
+     {
+      "text_present": "Во славу теней"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-17",
+   "title": "Events and places are filed under the wrong town, one of them in Italy",
+   "priority": "fix first",
+   "pages": [
+    "https://www.ogo.co.il/ru/city/yifat",
+    "https://www.ogo.co.il/en/event/il/tel-aviv/2026/11/25/cinem-club-many-faces-series-5ft61YfyVif9DQZH1X1LB2",
+    "https://www.ogo.co.il/en/places?type=forest&city=tel-aviv&free=1",
+    "https://www.ogo.co.il/ru/city/kfar-truman"
+   ],
+   "fixed_when": "Events are filed under the town where they take place, events abroad are kept off Israeli city pages, and the map points to the real venue.",
+   "viewport": "desktop",
+   "observed": "The Yifat page lists \"Альта Виа 1\", 3–10 August 2027. Its page describes a mountain trek in the Dolomites in northern Italy. The Cinema Club page gives \"Tel Aviv-Yafo\" and directions to \"ANU – Museum of the Jewish People\", while its summary says the meetings are \"at Mishkan in Ra'anana\". \"Forests in Tel Aviv\" shows forests in Oranit and Shoham.",
+   "expected": "Events are filed under the town where they take place, events abroad are kept off Israeli city pages, and the map points to the real venue.",
+   "why": "A visitor may set off for the wrong town, or think there is a trek near Yifat.",
+   "steps": [
+    "Open /ru/city/yifat, scroll to August 2027, open \"Альта Виа 1\".",
+    "Open /en/event/il/tel-aviv/2026/11/25/cinem-club-many-faces-series-5ft61YfyVif9DQZH1X1LB2 and compare the destination with the summary."
+   ],
+   "suggested_fix": "Resolve the city from the venue's coordinates, not the organiser's address; flag events whose description names a foreign country.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/city/yifat",
+    "viewport": "desktop",
+    "wait_ms": 2500,
+    "assert_bug_present": [
+     {
+      "text_present": "Альта Виа 1"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-18",
+   "title": "Event summaries contradict the date, time or place on the same page",
+   "priority": "fix first",
+   "pages": [
+    "https://www.ogo.co.il/en/event/il/haifa/2026/06/28/exhibition-in-praise-shadows-or-silence-light-1q5cbcDimJtqvx1XyJdb6j",
+    "https://www.ogo.co.il/en/event/il/jerusalem/2026/11/25/concert-hysteria-9xDP6dPgF9X8XR3wSwUAJQ",
+    "https://www.ogo.co.il/en/event/il/jerusalem/2026/11/25/fair-talpiot-food-market-vE45wUs9VjQJYYXq4WtMAX",
+    "https://www.ogo.co.il/en/event/il/beer-sheva/2026/11/25/chefs-games-community-wednesday-yes-community-initiative-third-ge-6uCQou6A478ipojAgKPJa5",
+    "https://www.ogo.co.il/en/event/il/ramat-gan/2026/11/25/lectures-by-ramat-hen-veterans-club-f-month-november-iyfA1yJEmSVnnbxsuUk5Pf"
+   ],
+   "fixed_when": "On each of these pages the summary gives the same dates, times and venue as the schedule and location block.",
+   "viewport": "desktop",
+   "observed": "In Praise of Shadows: the summary says \"It runs from 28 November 2026 to 28 June 2026\" (backwards); the schedule says \"June 28 – November 28\". Hysteria: the summary says \"November 25, 26, and 28, 2026, at Pais Arena\"; the description says Menora Hall and Jerusalem Arena during Hanukkah. Talpiot Food Market: the location says \"Ben Yehuda School, Nakhshon St 11\"; the summary says \"Nivaya School, 6 Kibbutz Galuyot St.\". Chef's Games: card 4:30 PM, summary \"16:00–18:30\". Ramat Hen: schedule \"Wednesdays and Sundays at 11:30\", summary \"Sundays at 11:30 and Wednesdays at 18:00\".",
+   "expected": "On each of these pages the summary gives the same dates, times and venue as the schedule and location block.",
+   "why": "A visitor reads the summary first and may go to the wrong place or at the wrong time.",
+   "steps": [
+    "Open each page.",
+    "Compare the SUMMARY block with the schedule and the location block."
+   ],
+   "suggested_fix": "Generate the summary from the structured date, time and venue fields, or check it against them and flag mismatches for review.",
+   "check": {
+    "url": "https://www.ogo.co.il/en/event/il/haifa/2026/06/28/exhibition-in-praise-shadows-or-silence-light-1q5cbcDimJtqvx1XyJdb6j",
+    "viewport": "desktop",
+    "wait_ms": 3000,
+    "assert_bug_present": [
+     {
+      "text_present": "from 28 November 2026 to 28 June 2026"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-19",
+   "title": "Tour cards sit on a later date and hide an earlier one",
+   "priority": "should fix",
+   "pages": [
+    "https://www.ogo.co.il/ru"
+   ],
+   "fixed_when": "A tour card sits at its next date, or says where the other dates are (\"ещё 1 дата: 26 нояб., Тель-Авив\").",
+   "viewport": "desktop",
+   "observed": "\"Концерт REFLEX\" is listed under Friday 27 Nov with \"Ещё 1 дата до 27 нояб.\" (1 more date until 27 Nov). The other date is 26 Nov in Tel Aviv, a day earlier. The same happens for Sasha Kroyter (listed 10 Dec, tour from 1 Dec), Tanya Vinokur (listed 4 Dec, other dates 25 and 26 Nov), Shaov and Gissen.",
+   "expected": "A tour card sits at its next date, or says where the other dates are (\"ещё 1 дата: 26 нояб., Тель-Авив\").",
+   "why": "A visitor who reads \"until 27 Nov\" on a 27 Nov card thinks this is the only chance and misses the earlier show.",
+   "steps": [
+    "Open /ru, find \"Концерт REFLEX\" under Friday 27 November.",
+    "Open it, click \"Все даты и города\": 26 Nov Tel Aviv, 27 Nov Haifa."
+   ],
+   "suggested_fix": "For tour cards, list the next upcoming instance or show the from–to range.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru",
+    "viewport": "desktop",
+    "wait_ms": 2500,
+    "assert_bug_present": [
+     {
+      "text_present": "Ещё 1 дата до 27 нояб."
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-20",
+   "title": "The same holiday has different event counts on the home page, the holidays page and the calendar",
+   "priority": "should fix",
+   "pages": [
+    "https://www.ogo.co.il/en",
+    "https://www.ogo.co.il/en/calendar",
+    "https://www.ogo.co.il/ru",
+    "https://www.ogo.co.il/ru/holidays",
+    "https://www.ogo.co.il/ru/calendar",
+    "https://www.ogo.co.il/en/holidays",
+    "https://www.ogo.co.il/ru/exhibitions/filtered?closing=1"
+   ],
+   "fixed_when": "One holiday or collection has one number everywhere, and the teaser count equals the number of items on the page it links to.",
+   "viewport": "desktop",
+   "observed": "Hanukkah (4–12 Dec): \"1,174 events\" on the English and Hebrew home pages, \"1 193 события\" on the Russian home and holidays pages, \"1,221 events\" on the calendar in all three languages. New Year: 148 (Russian holidays page), 82 (English), 172 (calendar). Purim: 51 on the holidays page, 40 on the calendar. Exhibitions closing soon: the home page says \"22 выставки\", the page it links to lists 21, the calendar says \"36 событий\".",
+   "expected": "One holiday or collection has one number everywhere, and the teaser count equals the number of items on the page it links to.",
+   "why": "A visitor sees three numbers for one thing and stops trusting any of them.",
+   "steps": [
+    "Open /en and read the \"Holiday soon\" tile.",
+    "Open /en/calendar and read the Hanukkah card.",
+    "Open /ru, /ru/holidays and /ru/exhibitions/filtered?closing=1 and compare."
+   ],
+   "suggested_fix": "Compute holiday and collection counts in one function (same date window, language filter and deduplication) and use it for the home tile, /holidays, /calendar and city pages.",
+   "check": {
+    "url": "https://www.ogo.co.il/en/calendar",
+    "viewport": "desktop",
+    "wait_ms": 2500,
+    "assert_bug_present": [
+     {
+      "text_present": "1,221 events"
+     },
+     {
+      "js_true": "fetch('/en').then(r=>r.text()).then(t=>{const m=t.replace(/<[^>]+>/g,' ').match(/Hanukkah[\\s\\S]{0,160}?([\\d,]+)\\s*events/);return !!m && m[1]!=='1,221'})"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-21",
+   "title": "City pages give two different event counts on the same page",
+   "priority": "should fix",
+   "pages": [
+    "https://www.ogo.co.il/ru/city/ashdod/today",
+    "https://www.ogo.co.il/ru/city/haifa/today",
+    "https://www.ogo.co.il/ru/city/tel-aviv/today",
+    "https://www.ogo.co.il/ru/city/jerusalem/today",
+    "https://www.ogo.co.il/ru/city/ashkelon/today",
+    "https://www.ogo.co.il/en/city/haifa",
+    "https://www.ogo.co.il/en/city/haifa/weekend"
+   ],
+   "fixed_when": "The tab title, the answer text and the list give one number, or the text says what the larger number includes.",
+   "viewport": "desktop",
+   "observed": "On \"Сегодня в Ашдоде\" the browser tab says \"9 событий\", the answer below says \"Сегодня в Ашдоде — 15 событий\" (15 events today) and the list shows 5 events. Haifa: 45 and 95. Tel Aviv: 270 and 443. Jerusalem: 136 and 168. Ashkelon: 4 and 5. On the English Haifa page the weekend link says \"All 54\", the weekend page says \"120 events are planned\", and its first page lists 60.",
+   "expected": "The tab title, the answer text and the list give one number, or the text says what the larger number includes.",
+   "why": "A visitor planning a day cannot tell how much is on.",
+   "steps": [
+    "Open /ru/city/ashdod/today.",
+    "Compare the tab title, the answer to \"Что происходит в Ашдоде сегодня?\" and the cards."
+   ],
+   "suggested_fix": "Compute title, FAQ and list from one query with the same filters; build the lead sentence from the listed items.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/city/ashdod/today",
+    "viewport": "desktop",
+    "wait_ms": 3000,
+    "assert_bug_present": [
+     {
+      "js_true": "(()=>{const a=(document.title.match(/— (\\d+) событ/)||[])[1]; const b=(document.body.innerText.match(/Сегодня в Ашдоде — (\\d+) событ/)||[])[1]; return a&&b&&a!==b})()"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-22",
+   "title": "Hanukkah pages show date headings out of order, one of them twice",
+   "priority": "should fix",
+   "pages": [
+    "https://www.ogo.co.il/ru/holidays/hanukkah",
+    "https://www.ogo.co.il/en/holidays/hanukkah",
+    "https://www.ogo.co.il/he/holidays/hanukkah",
+    "https://www.ogo.co.il/ru/holidays/hanukkah/haifa"
+   ],
+   "fixed_when": "Date headings run in order and each appears once; events that began before the holiday sit in one \"all holiday\" group.",
+   "viewport": "desktop and mobile",
+   "observed": "The headings run \"2–8 декабря\", then \"Вторник, 1 декабря\" (Tuesday 1 December), then \"2–8 декабря\" again. The first \"2–8 декабря\" group holds the 4 December events. The English and Hebrew pages and the Haifa page do the same.",
+   "expected": "Date headings run in order and each appears once; events that began before the holiday sit in one \"all holiday\" group.",
+   "why": "A visitor scanning by date for a Hanukkah night sees the same week twice and a date that goes backwards.",
+   "steps": [
+    "Open /ru/holidays/hanukkah.",
+    "Read the date headings above the cards."
+   ],
+   "suggested_fix": "Sort groups by date before rendering; put events that started before the holiday in one \"весь праздник\" group.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/holidays/hanukkah",
+    "viewport": "desktop",
+    "wait_ms": 2500,
+    "assert_bug_present": [
+     {
+      "js_true": "[...document.querySelectorAll('h2')].map(x=>x.innerText.trim()).filter(x=>x==='2–8 декабря').length>1"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-23",
+   "title": "\"Shushan Purim (Jerusalem)\" opens the general Purim page",
+   "priority": "should fix",
+   "pages": [
+    "https://www.ogo.co.il/en/calendar",
+    "https://www.ogo.co.il/en/holidays/purim"
+   ],
+   "fixed_when": "\"Shushan Purim (Jerusalem)\" opens Jerusalem events on Shushan Purim.",
+   "viewport": "desktop",
+   "observed": "On the calendar, \"Purim\" and \"Shushan Purim (Jerusalem)\" both link to /en/holidays/purim. That page covers 22–24 March, lists Tel Aviv events first and has no Jerusalem filter.",
+   "expected": "\"Shushan Purim (Jerusalem)\" opens Jerusalem events on Shushan Purim.",
+   "why": "A Jerusalem visitor looking for Shushan Purim events gets the national list.",
+   "steps": [
+    "Open /en/calendar.",
+    "Compare the links of \"Purim\" and \"Shushan Purim (Jerusalem)\"."
+   ],
+   "suggested_fix": "Link Shushan Purim to /en/holidays/purim/jerusalem (or a filtered view for its date).",
+   "check": {
+    "url": "https://www.ogo.co.il/en/calendar",
+    "viewport": "desktop",
+    "wait_ms": 3000,
+    "assert_bug_present": [
+     {
+      "js_true": "(()=>{const h=[...document.querySelectorAll('a')].filter(a=>/^(Purim|Shushan Purim \\(Jerusalem\\))$/.test(a.innerText.trim())).map(a=>a.getAttribute('href'));return h.length>=2 && new Set(h).size===1})()"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-24",
+   "title": "A cinema shows \"Open until 18:00\" in the middle of the night",
+   "priority": "minor",
+   "pages": [
+    "https://www.ogo.co.il/ru/places"
+   ],
+   "fixed_when": "At night the card says \"Закрыто · откроется в …\" (closed, opens at …).",
+   "viewport": "desktop",
+   "observed": "The first card, \"Кинотеатр Яффа\", says \"Открыто до 18:00\" (open until 18:00) at 01:10, 01:33 and 02:37 Israel time. Every other card at that hour says \"Откроется в 09:00\" (opens at 09:00).",
+   "expected": "At night the card says \"Закрыто · откроется в …\" (closed, opens at …).",
+   "why": "A visitor may set off for a place that is closed.",
+   "steps": [
+    "Open /ru/places at night, Israel time."
+   ],
+   "suggested_fix": "Check the open-now logic for hours that cross midnight or have no opening time; compute it in Asia/Jerusalem.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/places",
+    "viewport": "desktop",
+    "wait_ms": 2500,
+    "note": "only meaningful between 00:00 and 08:00 Israel time",
+    "assert_bug_present": [
+     {
+      "js_true": "(()=>{const h=+new Date().toLocaleString('en-US',{timeZone:'Asia/Jerusalem',hour:'numeric',hour12:false});return h<8 && document.body.innerText.includes('Кинотеатр Яффа\\nОткрыто до 18:00')})()"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-25",
+   "title": "The calendar promises \"a year ahead\" but stops at July 2027",
+   "priority": "minor",
+   "pages": [
+    "https://www.ogo.co.il/en/calendar"
+   ],
+   "fixed_when": "The calendar reaches November 2027, or the intro names the months it covers.",
+   "viewport": "desktop",
+   "observed": "The intro says the calendar covers \"a year ahead\". The month sections run from November 2026 to July 2027. Rosh Hashanah, Yom Kippur and Sukkot 2027 are not there.",
+   "expected": "The calendar reaches November 2027, or the intro names the months it covers.",
+   "why": "A visitor planning the autumn holidays finds nothing and may think nothing is planned.",
+   "steps": [
+    "Open /en/calendar.",
+    "Scroll to the last month section."
+   ],
+   "suggested_fix": "Extend the calendar data to 12 months, or change the copy.",
+   "check": {
+    "url": "https://www.ogo.co.il/en/calendar",
+    "viewport": "desktop",
+    "wait_ms": 3000,
+    "assert_bug_present": [
+     {
+      "text_present": "a year ahead"
+     },
+     {
+      "js_true": "!/(^|\\n)(August|September|October) 2027(\\n|$)/.test(document.body.innerText)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-26",
+   "title": "A sold-out event offers \"other dates\" that lead back to the same sold-out page",
+   "priority": "fix first",
+   "pages": [
+    "https://www.ogo.co.il/ru/event/il/ashdod/2026/11/25/ashdods-70th-birthday-visit-center-crTCvm4TZwjht7dqeVdTrJ"
+   ],
+   "fixed_when": "\"other dates\" appears only when another date has tickets, and each date is listed once.",
+   "viewport": "desktop",
+   "observed": "The page says \"Билеты распроданы\" (sold out) and offers \"Есть билеты на другие даты →\" (tickets for other dates). The link opens the same sold-out page. \"Все даты\" (all dates) lists \"25 ноября · распродано\", \"25 ноября\", \"25 ноября\". The page also says \"Проходит по средам до 25 нояб.\" (Wednesdays until 25 Nov), so no later date exists.",
+   "expected": "\"other dates\" appears only when another date has tickets, and each date is listed once.",
+   "why": "A visitor looking for tickets goes round in a circle.",
+   "steps": [
+    "Open the page.",
+    "Click \"Есть билеты на другие даты →\".",
+    "Open \"Все даты ▾\"."
+   ],
+   "suggested_fix": "Deduplicate sibling occurrences after the merge; hide the \"other dates\" link when the only alternatives are the same occurrence.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/event/il/ashdod/2026/11/25/ashdods-70th-birthday-visit-center-crTCvm4TZwjht7dqeVdTrJ",
+    "viewport": "desktop",
+    "wait_ms": 2500,
+    "assert_bug_present": [
+     {
+      "text_present": "Есть билеты на другие даты"
+     },
+     {
+      "text_present": "Билеты распроданы"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-27",
+   "title": "A postponed event: the title stops at \"postponed to\" and the page still shows the old date",
+   "priority": "fix first",
+   "pages": [
+    "https://www.ogo.co.il/ru/event/il/ein-hod/2026/12/04/quest-ur-rtists-village-postponed-bg5EQVChNhK4LGVwDrCGNq",
+    "https://www.ogo.co.il/he/event/il/ein-hod/2026/12/04/quest-ur-rtists-village-postponed-bg5EQVChNhK4LGVwDrCGNq"
+   ],
+   "fixed_when": "The page shows \"Перенесено\" (postponed) with the new date, or no date and no ticket button until there is one.",
+   "viewport": "desktop",
+   "observed": "The title reads \"Экскурсия-квест по деревне художников. Перенос на\" (\"… Postponed to\", with nothing after it). The Hebrew title stops at \"נדחה ל-\". The date block still says \"4 декабря, 10:00–14:00\", \"Купить билеты\" (buy tickets) is shown, and the page data still marks the event as scheduled.",
+   "expected": "The page shows \"Перенесено\" (postponed) with the new date, or no date and no ticket button until there is one.",
+   "why": "A visitor can buy a ticket for a date that is no longer valid.",
+   "steps": [
+    "Open the page in Russian and Hebrew.",
+    "Read the title and the date block."
+   ],
+   "suggested_fix": "Keep the new date from the source title; parse \"перенос на <date>\" into a status and date; set eventStatus to EventPostponed or EventRescheduled.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/event/il/ein-hod/2026/12/04/quest-ur-rtists-village-postponed-bg5EQVChNhK4LGVwDrCGNq",
+    "viewport": "desktop",
+    "wait_ms": 2500,
+    "assert_bug_present": [
+     {
+      "js_true": "/Перенос на$/.test(document.querySelector('h1').innerText.trim())"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-28",
+   "title": "Price ranges read \"from 126-286 ₪\", and the hidden page data gives the top price",
+   "priority": "should fix",
+   "pages": [
+    "https://www.ogo.co.il/ru/event/il/ashdod/2026/11/25/miyazakis-world-music-performed-by-symphonians-5wq4HyCADgX9L5ikmWdqts",
+    "https://www.ogo.co.il/en/event/il/ashdod/2026/11/25/miyazakis-world-music-performed-by-symphonians-5wq4HyCADgX9L5ikmWdqts",
+    "https://www.ogo.co.il/he/event/il/ashdod/2026/11/25/miyazakis-world-music-performed-by-symphonians-5wq4HyCADgX9L5ikmWdqts",
+    "https://www.ogo.co.il/ru/event/il/tel-aviv/2026/11/26/vasily-petrenko-conduct-or-nn-shelest-pianist-sTkfTcG36sfXYbiRqmqYS4"
+   ],
+   "fixed_when": "The title says \"от 126 ₪\" (or \"126–286 ₪\" without \"от\"), and the page data gives low price 126 and high price 286.",
+   "viewport": "desktop",
+   "observed": "The page title in all three languages says \"билеты от 126-286 ₪\" / \"tickets from 126-286 ₪\". The price block shows \"126-286 ₪\". The data that search engines read gives a single price of 286. The Petrenko concert reads \"от 220-640 ₪\" with 640 in the data.",
+   "expected": "The title says \"от 126 ₪\" (or \"126–286 ₪\" without \"от\"), and the page data gives low price 126 and high price 286.",
+   "why": "In search results the event can show the highest price as its price.",
+   "steps": [
+    "Open the page; read the browser tab title.",
+    "Read script[type=\"application/ld+json\"] offers.price."
+   ],
+   "suggested_fix": "When the price is a range, render \"from {min}\" and emit AggregateOffer with lowPrice and highPrice.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/event/il/ashdod/2026/11/25/miyazakis-world-music-performed-by-symphonians-5wq4HyCADgX9L5ikmWdqts",
+    "viewport": "desktop",
+    "wait_ms": 2000,
+    "assert_bug_present": [
+     {
+      "js_true": "/от \\d+-\\d+ ₪/.test(document.title)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-29",
+   "title": "Deal cards under \"Digitel\" do not show the deal",
+   "priority": "minor",
+   "pages": [
+    "https://www.ogo.co.il/en/deals"
+   ],
+   "fixed_when": "Every card under \"Digitel\" shows the provider and the discount.",
+   "viewport": "desktop",
+   "observed": "With the \"Digitel\" filter, the last-minute cards (Streamlining Processes, Treasure Beneath the Bridge, Pinocchio) show no provider and no discount. Without the filter, cards show \"Hulyo | Ticket for 73 ₪\", and \"With cards and clubs\" cards show \"Digitel | 10 ₪ off\".",
+   "expected": "Every card under \"Digitel\" shows the provider and the discount.",
+   "why": "On a deals page, a card without the deal gives the visitor no reason to click.",
+   "steps": [
+    "Open /en/deals.",
+    "Choose \"Digitel\".",
+    "Read the last-minute cards."
+   ],
+   "suggested_fix": "Render the provider and discount line for Digitel last-minute offers as for other providers.",
+   "check": null
+  },
+  {
+   "id": "OBS-30",
+   "title": "Venue names and addresses appear in the wrong language or with several spellings",
+   "priority": "should fix",
+   "pages": [
+    "https://www.ogo.co.il/ru/event/il/ashdod/2026/11/25/miyazakis-world-music-performed-by-symphonians-5wq4HyCADgX9L5ikmWdqts",
+    "https://www.ogo.co.il/ru/event/il/tel-aviv/2026/11/26/vasily-petrenko-conduct-or-nn-shelest-pianist-sTkfTcG36sfXYbiRqmqYS4",
+    "https://www.ogo.co.il/he/event/il/tel-aviv/2026/11/26/vasily-petrenko-conduct-or-nn-shelest-pianist-sTkfTcG36sfXYbiRqmqYS4",
+    "https://www.ogo.co.il/he/city/ein-hod"
+   ],
+   "fixed_when": "Each venue has one name per language, addresses are in the page language, and a missing venue name is not replaced by the city.",
+   "viewport": "desktop and mobile",
+   "observed": "One venue is spelled \"Леванваним Ашдод\" in the venue line, \"в Яд ле-Баним\" in the summary on the same page and \"Яд ла-Баним\" on the Ashdod page. The address line \"תחנה מרכזית, Sderot Menachem Begin 1, Ashdod\" mixes Hebrew and English on the Russian page. The Petrenko concert gives only \"Tel Aviv-Yafo, Israel\" in English on Russian and Hebrew pages, and on a phone the ticket bar cuts it to \"Tel Aviv-Yafo, Isr…\". The Hebrew name of Ein Hod is spelled \"עין חוד\" (title and city page) and \"עין הוד\" (summary).",
+   "expected": "Each venue has one name per language, addresses are in the page language, and a missing venue name is not replaced by the city.",
+   "why": "A visitor cannot match the venue on the page with the name on the map or the ticket.",
+   "steps": [
+    "Open the Miyazaki concert in Russian; compare the venue line with the summary.",
+    "Open the Petrenko concert in Russian on a phone."
+   ],
+   "suggested_fix": "Keep a venue dictionary with names per language; fall back to the venue name, not the city; fix the Hebrew spelling of Ein Hod.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/event/il/tel-aviv/2026/11/26/vasily-petrenko-conduct-or-nn-shelest-pianist-sTkfTcG36sfXYbiRqmqYS4",
+    "viewport": "mobile",
+    "wait_ms": 3500,
+    "assert_bug_present": [
+     {
+      "text_present": "Tel Aviv-Yafo, Israel"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-31",
+   "title": "Russian text on English pages, Hebrew titles on Russian pages, and broken text",
+   "priority": "should fix",
+   "pages": [
+    "https://www.ogo.co.il/en/event/il/tel-aviv/2026/11/25/design-week-israel-ike7HGCGbDSzEsKmNo6dAb",
+    "https://www.ogo.co.il/ru/festivals",
+    "https://www.ogo.co.il/ru/city/jerusalem/concerts",
+    "https://www.ogo.co.il/ru/city/haifa/free",
+    "https://www.ogo.co.il/en/event/il/tel-aviv/2026/11/12/exhibition-opening-rchitects-dream-or-maj-gratzfeld-and-roy-zvulun-kqZxi1ePt8REMaKV4JBCuB"
+   ],
+   "fixed_when": "Russian pages have no Hebrew-only titles, English pages have no Russian text, and descriptions end in full sentences.",
+   "viewport": "desktop",
+   "observed": "The English Design Week page has its summary in Russian: \"Design Week Tel Aviv — четыре дня выставок…\". /ru/festivals shows a festival called \"200 שנות צילום\" in Hebrew. Other Russian titles mix alphabets (\"Сиhара\"), repeat themselves (\"Книжный клуб 2026: … | Книжный клуб 2026: …\") or carry the schedule and street inside the title. The Architect's Dream description stops mid-sentence: \"…and between the\".",
+   "expected": "Russian pages have no Hebrew-only titles, English pages have no Russian text, and descriptions end in full sentences.",
+   "why": "A visitor reads a page they cannot understand, or text that looks broken.",
+   "steps": [
+    "Open the Design Week page in English and read SUMMARY.",
+    "Open /ru/festivals and scroll to 17–19 December."
+   ],
+   "suggested_fix": "Add a check at import: no Hebrew letters in Russian titles, no Cyrillic in English text, no repeated \"A | A\", no time or street inside titles; send failures back for translation.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/festivals",
+    "viewport": "desktop",
+    "wait_ms": 2500,
+    "assert_bug_present": [
+     {
+      "text_present": "200 שנות צילום"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-32",
+   "title": "English and Hebrew pages keep the raw promotional title",
+   "priority": "minor",
+   "pages": [
+    "https://www.ogo.co.il/en/event/il/haifa/2026/11/25/performance-by-zheny-berkovich-tragicomedy-our-treasure-performance-has-been-h445tvMFxLBRRD8R46tJwd",
+    "https://www.ogo.co.il/he/event/il/haifa/2026/11/25/performance-by-zheny-berkovich-tragicomedy-our-treasure-performance-has-been-h445tvMFxLBRRD8R46tJwd",
+    "https://www.ogo.co.il/ru/event/il/haifa/2026/11/25/performance-by-zheny-berkovich-tragicomedy-our-treasure-performance-has-been-h445tvMFxLBRRD8R46tJwd"
+   ],
+   "fixed_when": "The English and Hebrew titles are translations of the cleaned Russian title.",
+   "viewport": "desktop",
+   "observed": "Russian: \"Спектакль Жени Беркович «Наше сокровище»\". English: \"Performance by Zhenya Berkovich - Tragicomedy Our Treasure - the performance has been removed from the theater's repertoire in Russia\". The Hebrew title is the same long line. The Petrenko concert is \"Концерт Василия Петренко и Анны Шелест\" in Russian and \"Vasily Petrenko conductor | Anna Shelest pianist\" in English.",
+   "expected": "The English and Hebrew titles are translations of the cleaned Russian title.",
+   "why": "Visitors who switch language think they are looking at a different event.",
+   "steps": [
+    "Open the event in Russian, then switch to English and Hebrew.",
+    "Compare the titles."
+   ],
+   "suggested_fix": "Translate from the cleaned title field, not the raw source title.",
+   "check": {
+    "url": "https://www.ogo.co.il/en/event/il/haifa/2026/11/25/performance-by-zheny-berkovich-tragicomedy-our-treasure-performance-has-been-h445tvMFxLBRRD8R46tJwd",
+    "viewport": "desktop",
+    "wait_ms": 2000,
+    "assert_bug_present": [
+     {
+      "text_present": "removed from the theater's repertoire"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-33",
+   "title": "The city weather row runs backwards in Hebrew and is cut off on small phones",
+   "priority": "should fix",
+   "pages": [
+    "https://www.ogo.co.il/he/city/tel-aviv",
+    "https://www.ogo.co.il/ru/city/tel-aviv",
+    "https://www.ogo.co.il/en/city/tel-aviv"
+   ],
+   "fixed_when": "In Hebrew today comes first on the right, labels stay on one line, and all three days fit at 320 px.",
+   "viewport": "mobile",
+   "observed": "In Hebrew the three days read Friday, Thursday, Wednesday from the right, where a Hebrew reader starts, so today is last. Each Hebrew day label breaks onto two lines (\"יום\" / \"ד׳\"), and at 320 px today's label is pushed off the left edge. In Russian and English at 320 px the row is wider than the screen and the last day is cut off (\"Пт ☀ 2…\").",
+   "expected": "In Hebrew today comes first on the right, labels stay on one line, and all three days fit at 320 px.",
+   "why": "A visitor checking the weather for a day out reads the wrong day or cannot see it.",
+   "steps": [
+    "Open /he/city/tel-aviv on a phone.",
+    "Open /ru/city/tel-aviv at 320 px wide."
+   ],
+   "suggested_fix": "Remove the fixed dir=ltr on the weather row (keep it only on the temperature numbers), add white-space:nowrap to day labels, and reduce the gaps below 360 px.",
+   "check": {
+    "url": "https://www.ogo.co.il/he/city/tel-aviv",
+    "viewport": "mobile",
+    "wait_ms": 3500,
+    "assert_bug_present": [
+     {
+      "js_true": "[...document.querySelectorAll('span')].some(s=>/^יום [דהו]׳$/.test(s.innerText.trim())&&getComputedStyle(s).direction==='ltr')"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-34",
+   "title": "The calendar's category filter slides under the header when you scroll",
+   "priority": "should fix",
+   "pages": [
+    "https://www.ogo.co.il/ru/calendar",
+    "https://www.ogo.co.il/he/calendar",
+    "https://www.ogo.co.il/en/calendar"
+   ],
+   "fixed_when": "While scrolling, the filter row stays visible just below the header.",
+   "viewport": "mobile",
+   "observed": "The filter row \"Все · Праздники · Каникулы · Природа · Другое\" is meant to stay at the top while scrolling, but it sticks at the same height as the fixed header and ends up behind it. After a few months of scrolling only the search header is visible. Same in all three languages.",
+   "expected": "While scrolling, the filter row stays visible just below the header.",
+   "why": "On a long year list the visitor has to scroll all the way back up to change the category.",
+   "steps": [
+    "Open /ru/calendar on a phone (390 px).",
+    "Scroll down a few months."
+   ],
+   "suggested_fix": "Set the sticky row top to the header height (for example top: var(--header-h)), or render it inside the header.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/calendar",
+    "viewport": "mobile",
+    "wait_ms": 3500,
+    "assert_bug_present": [
+     {
+      "js_true": "(async()=>{const f=document.querySelector('div.sticky.top-0');f.scrollIntoView();let p=f.parentElement;while(p&&p!==document.documentElement){const o=getComputedStyle(p).overflowY;if((o==='auto'||o==='scroll')&&p.scrollHeight>p.clientHeight)break;p=p.parentElement}(p&&p!==document.documentElement?p:window).scrollBy(0,900);await new Promise(r=>setTimeout(r,800));const r=f.getBoundingClientRect();return !f.contains(document.elementFromPoint(r.left+r.width/2,r.top+r.height/2))})()"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-35",
+   "title": "Holiday dates, event names and tour cities are cut off on phones",
+   "priority": "should fix",
+   "pages": [
+    "https://www.ogo.co.il/ru",
+    "https://www.ogo.co.il/ru/city/tel-aviv",
+    "https://www.ogo.co.il/ru/concerts",
+    "https://www.ogo.co.il/ru/holidays/hanukkah",
+    "https://www.ogo.co.il/en"
+   ],
+   "fixed_when": "At 320 px the banners show the full date and event name, and tour cards show the city list on two lines or in a shorter form.",
+   "viewport": "mobile",
+   "observed": "At 320 px: on the home page the \"Смотрят сейчас\" (being viewed now) banner shows \"Фестиваль света «…\" and loses the event name. On /ru/city/tel-aviv the holiday banner shows \"Ханука · 4–12 дека…\" and \"через 9 дней · 298 собы…\". On tour cards the list of cities is cut at about half its length, for example \"Явне, Ашдод, Йехуд-Моноссон и ещё 30 городов\" on the home page; 7 cards on /ru/concerts and 6 on /ru/holidays/hanukkah. At 390 px the Tel Aviv subtitle is still cut. At 768 px the home banners cut \"Ханука · 4–12 декабря\" and \"22 выставки — например…\".",
+   "expected": "At 320 px the banners show the full date and event name, and tour cards show the city list on two lines or in a shorter form.",
+   "why": "The cut part is the content: the date, the event name, or the cities where a tour plays.",
+   "steps": [
+    "Open /ru and /ru/city/tel-aviv at 320 px wide.",
+    "Read the yellow and pink banners and the city lines on tour cards."
+   ],
+   "suggested_fix": "Use two-line clamping instead of single-line truncation on banner titles and subtitles and on tour city lists, or shorten the subtitle on narrow screens.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/city/tel-aviv",
+    "viewport": "320x640",
+    "wait_ms": 3500,
+    "assert_bug_present": [
+     {
+      "js_true": "[...document.querySelectorAll('span.truncate')].some(e=>/Ханука|событий/.test(e.innerText)&&e.scrollWidth>e.clientWidth+1)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-36",
+   "title": "On small phones the \"Next page\" button is off the screen",
+   "priority": "should fix",
+   "pages": [
+    "https://www.ogo.co.il/ru/city/tel-aviv",
+    "https://www.ogo.co.il/ru/concerts",
+    "https://www.ogo.co.il/he/city/tel-aviv"
+   ],
+   "fixed_when": "At 320 px previous and next are always visible, and the page list shrinks to fit.",
+   "viewport": "mobile",
+   "observed": "At 320 px the page numbers are wider than the screen. In Russian and English \"Следующая страница\" (next page) and the last page number are beyond the right edge; in Hebrew the next button is beyond the left edge and the last page shows only \"2\" of \"72\". City and concert pages, all three languages.",
+   "expected": "At 320 px previous and next are always visible, and the page list shrinks to fit.",
+   "why": "A visitor on a small phone cannot get past page 1 without guessing.",
+   "steps": [
+    "Open /ru/city/tel-aviv at 320 px wide.",
+    "Scroll to the page numbers."
+   ],
+   "suggested_fix": "Below 360 px show previous, current, …, last, next only, or reduce button size and gaps.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/city/tel-aviv",
+    "viewport": "320x640",
+    "wait_ms": 3500,
+    "assert_bug_present": [
+     {
+      "js_true": "[...document.querySelectorAll('nav')].some(n=>/\\d/.test(n.innerText)&&n.scrollWidth>n.clientWidth+20)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-37",
+   "title": "The cookie bar covers search suggestions and, in landscape, much of the event page",
+   "priority": "minor",
+   "pages": [
+    "https://www.ogo.co.il/ru/event/il/tel-aviv/2026/11/26/vasily-petrenko-conduct-or-nn-shelest-pianist-sTkfTcG36sfXYbiRqmqYS4",
+    "https://www.ogo.co.il/ru"
+   ],
+   "fixed_when": "The search suggestions open above the cookie bar, and in landscape the ticket bar is one line and never shows together with the cookie bar.",
+   "viewport": "mobile",
+   "observed": "On a phone held sideways (568×320) the ticket bar and the cookie bar together take 106 of 320 px while scrolling, and 157 px at the top of the page with the header. On the home page at 320 px the cookie bar sits over the bottom of the search suggestions; sideways it hides a result row and \"Все результаты…\".",
+   "expected": "The search suggestions open above the cookie bar, and in landscape the ticket bar is one line and never shows together with the cookie bar.",
+   "why": "Until the visitor closes the cookie bar, a third of a landscape screen and part of the search results are hidden.",
+   "steps": [
+    "Open the event page at 568×320 without closing the cookie bar.",
+    "Open /ru at 320×640 and type \"Тель-Авив концерт\" in the search box."
+   ],
+   "suggested_fix": "Give the suggestions a max-height that stops above the cookie bar (or a higher z-index); in short landscape screens make the ticket bar one line and stack it with the cookie bar.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/event/il/tel-aviv/2026/11/26/vasily-petrenko-conduct-or-nn-shelest-pianist-sTkfTcG36sfXYbiRqmqYS4",
+    "viewport": "568x320",
+    "wait_ms": 3500,
+    "assert_bug_present": [
+     {
+      "js_true": "(()=>{let top=innerHeight;for(const e of document.querySelectorAll('body *')){const s=getComputedStyle(e);if(s.position==='fixed'||s.position==='sticky'){const r=e.getBoundingClientRect();if(r.height>0&&r.top>innerHeight/2&&r.height<innerHeight/2)top=Math.min(top,r.top)}}return innerHeight-top>innerHeight*0.3})()"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-38",
+   "title": "The menu, language and cookie buttons are smaller than a fingertip",
+   "priority": "minor",
+   "pages": [
+    "https://www.ogo.co.il/ru",
+    "https://www.ogo.co.il/he",
+    "https://www.ogo.co.il/en"
+   ],
+   "fixed_when": "These controls have a tap area of at least 44×44 px (the drawing can stay the same size).",
+   "viewport": "mobile",
+   "observed": "The menu button is 32×32 px, the language button 38×32, the quick chips (\"Сегодня\", \"Выходные\", \"Рядом со мной\", \"С детьми\", \"Ещё\") 32 px tall, the cookie bar's close button 28×28. The usual minimum is 44×44.",
+   "expected": "These controls have a tap area of at least 44×44 px (the drawing can stay the same size).",
+   "why": "Visitors on phones mis-tap, especially on the cookie close button.",
+   "steps": [
+    "Open /ru at 390 px wide.",
+    "Measure the menu, language and cookie close buttons."
+   ],
+   "suggested_fix": "Pad the hit area to 44 px (min-height and min-width, or a transparent ::after) without changing the visible size.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru",
+    "viewport": "mobile",
+    "wait_ms": 3500,
+    "assert_bug_present": [
+     {
+      "js_true": "document.querySelector('button[aria-label=\"Меню\"]').getBoundingClientRect().height<44"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-39",
+   "title": "With a keyboard, the open menu lets you open the language picker behind it",
+   "priority": "minor",
+   "pages": [
+    "https://www.ogo.co.il/en"
+   ],
+   "fixed_when": "While the menu is open, Tab moves only within the menu, and Escape closes it.",
+   "viewport": "mobile",
+   "observed": "Pressing Tab, Enter opens the menu. The next Tab moves focus to the \"EN\" button behind the menu, and Enter opens the language picker behind the open menu.",
+   "expected": "While the menu is open, Tab moves only within the menu, and Escape closes it.",
+   "why": "A keyboard or screen-reader user ends up in a dialog they cannot see.",
+   "steps": [
+    "Open /en on a phone-sized screen with a keyboard.",
+    "Press Tab, Enter, Tab, Enter."
+   ],
+   "suggested_fix": "Trap focus inside the open drawer (inert on the rest of the page) and return focus to the menu button on close.",
+   "check": null
+  },
+  {
+   "id": "OBS-40",
+   "title": "A mistyped date in a link crashes the page",
+   "priority": "fix first",
+   "pages": [
+    "https://www.ogo.co.il/ru/filtered?start=2026-02-30&end=2026-02-30",
+    "https://www.ogo.co.il/ru/filtered?start=abc&end=abc",
+    "https://www.ogo.co.il/ru/filtered?start=2026-11-30&end=2026-11-26"
+   ],
+   "fixed_when": "An invalid date is ignored or corrected and the list loads normally; a reversed range is swapped.",
+   "viewport": "desktop and mobile",
+   "observed": "The server answers with error 500 and the page shows only \"Application error: a client-side exception has occurred (see the browser console for more information).\" Same for \"start=abc\" and \"start=2026-13-01\". A reversed range (start=2026-11-30&end=2026-11-26) is accepted and shown as \"30 нояб. – 26 нояб.\" with 7 events.",
+   "expected": "An invalid date is ignored or corrected and the list loads normally; a reversed range is swapped.",
+   "why": "A shared or edited link with one wrong digit gives the visitor a blank error page.",
+   "steps": [
+    "Open /ru/filtered?start=2026-02-30&end=2026-02-30."
+   ],
+   "suggested_fix": "Validate start and end on the server (ISO date, real calendar day); drop or redirect on failure; swap a reversed range.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru/filtered?start=2026-02-30&end=2026-02-30",
+    "viewport": "desktop",
+    "wait_ms": 8000,
+    "assert_bug_present": [
+     {
+      "text_present": "Application error"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-41",
+   "title": "English and Hebrew event pages tell search engines the city and language in Russian",
+   "priority": "should fix",
+   "pages": [
+    "https://www.ogo.co.il/en/event/il/ashdod/2026/11/25/miyazakis-world-music-performed-by-symphonians-5wq4HyCADgX9L5ikmWdqts",
+    "https://www.ogo.co.il/he/event/il/tel-aviv/2026/11/25/light-festival-lumagica-sg3haMfwLL4yDeJsz22a12"
+   ],
+   "fixed_when": "On English and Hebrew pages the page data gives the city in the page language and the language as a code (ru, he, en).",
+   "viewport": "desktop",
+   "observed": "The visible English page is correct. The hidden page data that search engines read says \"addressLocality\": \"Ашдод\", \"inLanguage\": \"Другой язык\" (other language) and \"keywords\": \"концерт\". The Hebrew Lumagica page says \"Тель-Авив\" and \"Иврит\". On Russian pages too, the language is a Russian word, not a code like \"he\".",
+   "expected": "On English and Hebrew pages the page data gives the city in the page language and the language as a code (ru, he, en).",
+   "why": "Google may show Russian city names in English and Hebrew results, or file the events under the wrong language.",
+   "steps": [
+    "Open an /en/event/ or /he/event/ page.",
+    "Read script[type=\"application/ld+json\"]: location.address.addressLocality, inLanguage, keywords."
+   ],
+   "suggested_fix": "Pass the page locale into the JSON-LD builder for city and tag names; map the event language to ISO codes.",
+   "check": {
+    "url": "https://www.ogo.co.il/en/event/il/ashdod/2026/11/25/miyazakis-world-music-performed-by-symphonians-5wq4HyCADgX9L5ikmWdqts",
+    "viewport": "desktop",
+    "wait_ms": 2500,
+    "assert_bug_present": [
+     {
+      "js_true": "[...document.querySelectorAll('script[type=\"application/ld+json\"]')].some(s=>/addressLocality\":\"[А-Яа-я]/.test(s.textContent))"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-42",
+   "title": "About one in five event addresses has letters missing",
+   "priority": "minor",
+   "pages": [
+    "https://www.ogo.co.il/ru",
+    "https://www.ogo.co.il/ru/event/il/ein-hod/2026/12/04/quest-ur-rtists-village-postponed-bg5EQVChNhK4LGVwDrCGNq"
+   ],
+   "fixed_when": "Addresses keep whole words (\"tel-aviv\", \"tour-ariel-university\") and each event has one address.",
+   "viewport": "desktop",
+   "observed": "583 of 2,836 event addresses look garbled: \"…/st-up-sony-wright-tel-viv-…\", \"…/tour-riel-university-…\", \"…/shluvot-gathering-f-women-coping-…\", \"…/quest-ur-rtists-village-postponed-…\". Short words such as \"a\", \"to\" and \"or\" seem to be removed inside other words, not only as whole words. The Lumagica event is also served at two addresses, dated 12 and 25 November.",
+   "expected": "Addresses keep whole words (\"tel-aviv\", \"tour-ariel-university\") and each event has one address.",
+   "why": "A visitor who shares or reads a link sees a broken word, and the same event under two addresses splits its search ranking.",
+   "steps": [
+    "Hover any event link on /ru and read the address."
+   ],
+   "suggested_fix": "Remove stop-words only as whole tokens (split on \"-\", filter, join); add one canonical URL per event id.",
+   "check": {
+    "url": "https://www.ogo.co.il/ru",
+    "viewport": "desktop",
+    "wait_ms": 2500,
+    "assert_bug_present": [
+     {
+      "js_true": "[...document.querySelectorAll('a[href*=\"/event/\"]')].some(a=>/tel-viv|-ur-|riel-university|-f-/.test(a.getAttribute('href')))"
+     }
+    ]
+   }
+  },
+  {
+   "id": "OBS-43",
+   "title": "The brand kit offers two downloads both labelled \"PNG\"",
+   "priority": "minor",
+   "pages": [
+    "https://www.ogo.co.il/en/partners"
+   ],
+   "fixed_when": "The links read \"Blue PNG\" and \"White PNG\".",
+   "viewport": "desktop",
+   "observed": "The Avatar card shows \"PNG | PNG\". The two links download ogo-avatar-blue-1024.png and ogo-avatar-white-1024.png.",
+   "expected": "The links read \"Blue PNG\" and \"White PNG\".",
+   "why": "A partner has to download both to find the one they need.",
+   "steps": [
+    "Open /en/partners.",
+    "Read the Avatar card."
+   ],
+   "suggested_fix": "Add the colour to each download label.",
+   "check": {
+    "url": "https://www.ogo.co.il/en/partners",
+    "viewport": "desktop",
+    "wait_ms": 2500,
+    "assert_bug_present": [
+     {
+      "js_true": "(async()=>{const b=[...document.querySelectorAll('button,a,[role=tab]')].find(e=>e.innerText.trim()==='Brand materials');if(b){b.click();await new Promise(r=>setTimeout(r,2000))}return /Avatar\\s*\\n\\s*PNG\\s*\\n\\s*PNG/.test(document.body.innerText)})()"
+     }
+    ]
+   }
+  }
+ ]
+}
